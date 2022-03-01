@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#E85651"
+    android:gravity="center"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:padding="20dp"
+                android:src="@drawable/item_appel_urgence" />
+
+            <TextView
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+
+                android:text="Appel d'urgence"
+                android:textColor="@color/red"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="26dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_weight="2"
+                android:background="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_weight="1"
+                android:text="Police"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textColor="@color/whiteTextColor" />
+
+            <TextView
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:text="Pompier"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textColor="@color/whiteTextColor" />
+
+            <!-- Le 'marginRight' sert à centrer comme un shlag -->
+
+            <TextView
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="13dp"
+                android:text="Samu"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textColor="@color/whiteTextColor" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_weight="1"
+                android:background="@drawable/text_view_background"
+                android:text="17"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="30dp"
+                android:textColor="@color/whiteTextColor" />
+
+            <TextView
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/text_view_background"
+                android:text="18"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="30dp"
+                android:textColor="@color/whiteTextColor" />
+
+            <TextView
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/text_view_background"
+                android:text="15"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="30dp"
+                android:textColor="@color/whiteTextColor" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/nom_contact1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom contact 1 "
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:textColor="@color/whiteTextColor" />
+
+            <LinearLayout
+                android:id="@+id/contact_med_legal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/white">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/item_telephone"
+                    android:backgroundTint="@color/white" />
+
+                <!-- Ligne verticale decoration -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="100dp"
+                        android:background="@color/black" />
+                </LinearLayout>
+                <!-- 'TextView à ajouter dynamiquement-->
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/nom_contact2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom contact 2 "
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:textColor="@color/whiteTextColor" />
+
+            <LinearLayout
+                android:id="@+id/contact_tuteur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/white">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/item_telephone"
+                    android:backgroundTint="@color/white" />
+
+                <!-- Ligne verticale decoration -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="100dp"
+                        android:background="@color/black" />
+                </LinearLayout>
+                <!-- 'TextView à ajouter dynamiquement-->
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
