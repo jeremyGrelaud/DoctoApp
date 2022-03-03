@@ -1,0 +1,20 @@
+*{
+	font-family: "Ubuntu", sans-serif;
+	box-sizing: border-box; 
+}
+
+html {
+    scroll-behavior: smooth;
+    background: linear-gradient(208.85deg, rgba(0, 0, 0, 0) -33.83%, #9e2525 49.54%, rgba(214, 197, 197, 0) 132.9%), #BF64E3;
+    color: white;
+}
+
+body{
+    /* background-color: lightsalmon;*/
+    text-align: center;
+}
+
+h1 {
+    font-family: cursive;
+    font-style: oblique; 
+}
