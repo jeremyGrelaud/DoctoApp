@@ -1,0 +1,41 @@
+CREATE TABLE Dosing_Time(
+   idDate INT,
+   Date_hour DATETIME,
+   taken LOGICAL,
+   PRIMARY KEY(idDate)
+);
+
+CREATE TABLE Tutor(
+   mail_tutor VARCHAR(50),
+   PRIMARY KEY(mail_tutor)
+);
+
+CREATE TABLE Medical_Appointments(
+   id_appointment INT,
+   date_appointment DATETIME,
+   Name_doctor VARCHAR(50),
+   Adress VARCHAR(50),
+   PRIMARY KEY(id_appointment)
+);
+
+CREATE TABLE Treatment_list(
+   idTreatment INT,
+   Remaining_Days INT,
+   Dosage VARCHAR(50),
+   idDate INT NOT NULL,
+   PRIMARY KEY(idTreatment),
+   FOREIGN KEY(idDate) REFERENCES Dosing_Time(idDate)
+);
+
+CREATE TABLE Users(
+   id_user INT,
+   mail VARCHAR(50) NOT NULL,
+   password VARCHAR(50),
+   id_appointment INT NOT NULL,
+   mail_tutor VARCHAR(50) NOT NULL,
+   idTreatment INT NOT NULL,
+   PRIMARY KEY(id_user),
+   FOREIGN KEY(id_appointment) REFERENCES Medical_Appointments(id_appointment),
+   FOREIGN KEY(mail_tutor) REFERENCES Tutor(mail_tutor),
+   FOREIGN KEY(idTreatment) REFERENCES Treatment_list(idTreatment)
+);
