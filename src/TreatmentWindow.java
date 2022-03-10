@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,12 +18,13 @@ public class TreatmentWindow implements ActionListener {
 
         JPanel p = new JPanel();
         try {
-
+            int id_user=1;
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
 
             PreparedStatement ps = con.prepareStatement("SELECT  Treatment_list.Name,Treatment_list.Remaining_Days , Treatment_list.Dosage, Dosing_Time.Date_hour, Dosing_Time.taken\n" +
-                    "FROM Treatment_list INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate ;");;
+                    "FROM Treatment_list INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate\n" +
+                    "WHERE id_user='"+id_user+"';");;
             ResultSet rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product
 
             //header of our table
@@ -34,25 +36,28 @@ public class TreatmentWindow implements ActionListener {
             JLabel h6 = new JLabel("taken", SwingConstants.CENTER);
             p.add(h1);p.add(h2);p.add(h3);p.add(h4);p.add(h5);p.add(h6);
 
+            // create a line border with the specified color and width
+            Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2);
+
             //while loop to add each datas of each rows/products in the database
-            TextField l1 =null,l2=null,l3=null,l4=null,l5=null,l6=null;
+            JLabel l1 =null,l2=null,l3=null,l4=null,l5=null,l6=null;
             p.setLayout(new GridLayout(1,6));
             int row=2;
             while(rs.next()) {
-                l1 = new TextField();
+                l1 = new JLabel("",SwingConstants.CENTER);
                 l1.setText(rs.getString(1));
-                l2 = new TextField();
+                l2 = new JLabel("",SwingConstants.CENTER);
                 l2.setText(rs.getString(2));
-                l3 = new TextField();
+                l3 = new JLabel("",SwingConstants.CENTER);
                 l3.setText(rs.getString(3));
-                l4 = new TextField(); //date
-                l5 = new TextField(); // hour
+                l4 = new JLabel("",SwingConstants.CENTER); //date
+                l5 = new JLabel("",SwingConstants.CENTER); // hour
                 String datetime = rs.getString(4);
                 String[] tab = datetime.split(" ");
                 l4.setText(tab[0]);
                 l5.setText(tab[1]);
 
-                l6 = new TextField();
+                l6 = new JLabel("",SwingConstants.CENTER);
                 String taken = rs.getString(5);
                 if(taken.equalsIgnoreCase("0")){
                     l6.setText("no");
@@ -63,6 +68,13 @@ public class TreatmentWindow implements ActionListener {
                 else{
                     l6.setText("error");
                 }
+
+                l1.setBorder(border);
+                l2.setBorder(border);
+                l3.setBorder(border);
+                l4.setBorder(border);
+                l5.setBorder(border);
+                l6.setBorder(border);
 
                 p.add(l1);p.add(l2);p.add(l3);p.add(l4);p.add(l5);p.add(l6);
                 p.setLayout(new GridLayout(row,6));

@@ -79,7 +79,7 @@ FROM Medical_Appointments
 WHERE id_user='1';
 
 /*get the next appointment*/
-SELECT date_appointment 
+SELECT date_appointment,  Name_doctor
 FROM Medical_Appointments
 WHERE id_user='1' AND date_appointment >= CURRENT_TIMESTAMP()
 ORDER BY date_appointment ASC LIMIT 1;
