@@ -22,7 +22,7 @@ public class AppointmentsWindow implements ActionListener {
         frame.setVisible(true);
 
         frame.setSize(800, 800);
-        frame.setTitle("Table Product");
+        frame.setTitle("Future appointments");
         frame.setBackground(Color.GRAY);
         frame.setResizable(false);
 

@@ -22,7 +22,7 @@ public class TreatmentWindow implements ActionListener {
         frame.setVisible(true);
 
         frame.setSize(800, 800);
-        frame.setTitle("Table Product");
+        frame.setTitle("List of treatments");
         frame.setBackground(Color.GRAY);
         frame.setResizable(false);
 

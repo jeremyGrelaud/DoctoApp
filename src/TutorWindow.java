@@ -22,7 +22,7 @@ public class TutorWindow implements ActionListener {
         frame.setVisible(true);
 
         frame.setSize(800, 800);
-        frame.setTitle("Table Product");
+        frame.setTitle("Guardian information");
         frame.setBackground(Color.GRAY);
         frame.setResizable(false);
 
