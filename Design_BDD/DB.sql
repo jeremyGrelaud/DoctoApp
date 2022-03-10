@@ -7,6 +7,7 @@ CREATE TABLE Dosing_Time(
 
 CREATE TABLE Tutor(
    mail_tutor VARCHAR(50),
+   Name VARCHAR(50),
    PRIMARY KEY(mail_tutor)
 );
 
@@ -45,8 +46,8 @@ INSERT INTO Dosing_Time (idDate,Date_hour,taken) VALUES
 ('1','2022-03-10 11:30:00','1'),
 ('2','2022-03-10 15:30:00','0');
 
-INSERT INTO Tutor (mail_tutor) VALUES 
-('j.g@gmail.com');
+INSERT INTO Tutor (mail_tutor, Name) VALUES 
+('j.g@gmail.com','Jérémy GRELAUD');
 
 INSERT INTO Users (id_user,mail,password,mail_tutor) VALUES 
 ('1','gui@gmail;com','1234','j.g@gmail.com');
@@ -84,8 +85,8 @@ WHERE id_user='1' AND date_appointment >= CURRENT_TIMESTAMP()
 ORDER BY date_appointment ASC LIMIT 1;
 
 /*To get tutor's info*/
-SELECT mail_tutor
-FROM Users
+SELECT Tutor.mail_tutor, Tutor.Name
+FROM Users INNER JOIN Tutor ON Tutor.mail_tutor = Users.mail_tutor
 WHERE id_user='1';
 
 commit;
