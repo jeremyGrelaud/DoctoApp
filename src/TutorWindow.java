@@ -21,10 +21,10 @@ public class TutorWindow implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
 
-        frame.setSize(800, 800);
+        frame.setSize(1000, 1000);
         frame.setTitle("Guardian information");
         frame.setBackground(Color.GRAY);
-        frame.setResizable(false);
+        frame.setResizable(true);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
 

@@ -26,12 +26,12 @@ public class TreatmentWindow implements ActionListener {
             ResultSet rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product
 
             //header of our table
-            Label h1 = new Label("Treatment Name");
-            Label h2 = new Label("Remaining days");
-            Label h3 = new Label("Dosage");
-            Label h4 = new Label("Date");
-            Label h5 = new Label("Hour");
-            Label h6 = new Label("taken");
+            JLabel h1 = new JLabel("Treatment Name", SwingConstants.CENTER);
+            JLabel h2 = new JLabel("Remaining days", SwingConstants.CENTER);
+            JLabel h3 = new JLabel("Dosage", SwingConstants.CENTER);
+            JLabel h4 = new JLabel("Date", SwingConstants.CENTER);
+            JLabel h5 = new JLabel("Hour", SwingConstants.CENTER);
+            JLabel h6 = new JLabel("taken", SwingConstants.CENTER);
             p.add(h1);p.add(h2);p.add(h3);p.add(h4);p.add(h5);p.add(h6);
 
             //while loop to add each datas of each rows/products in the database
@@ -72,19 +72,19 @@ public class TreatmentWindow implements ActionListener {
             //creating a button allowing to go back to the main menu
             button_return_to_menu = new JButton("Return to menu");
             button_return_to_menu.setSize(200, 80);
-            button_return_to_menu.setLocation(300, 50);
+            button_return_to_menu.setLocation(350, 50);
             button_return_to_menu.addActionListener(this);
             frame.add(button_return_to_menu);
 
 
             p.setBackground(Color.white); //set the color of the window's background
-            p.setBounds(100,150,600,600); //set the coordinates of the pannel = gridlayout
+            p.setBounds(150,150,600,600); //set the coordinates of the pannel = gridlayout
             frame.add(p);
 
             frame.setLayout(null);
             frame.setVisible(true);
 
-            frame.setSize(800, 800);
+            frame.setSize(900, 900);
             frame.setTitle("List of treatments");
             frame.setBackground(Color.GRAY);
             frame.setResizable(false);
@@ -95,7 +95,7 @@ public class TreatmentWindow implements ActionListener {
         }catch(Exception e) {
             System.out.println(e);
         }
-        
+
 
     }
 
