@@ -1,16 +1,28 @@
 //import com.sun.javafx.css.Stylesheet;
 //import com.sun.javafx.css.parser.CSSParser;
 
+import javafx.embed.swing.JFXPanel;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.StackPane;
+
+import javax.management.Notification;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Optional;
+import javax.swing.Popup;
+
 
 public class GUI implements ActionListener  {
 
@@ -191,6 +203,64 @@ public class GUI implements ActionListener  {
             frame.setVisible(true);
             frame.setResizable(true);
 
+
+
+
+            /***WE now have to check if the user got treatments to take today to make notifications if needed*/
+
+            PreparedStatement ps2 = con.prepareStatement("SELECT Remaining_Days, Dosage, Name,  Date_hour\n" +
+                    "FROM Treatment_list INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate\n" +
+                    "WHERE id_user='"+id_user+"' AND Date_hour >= Date(now()) AND Date_hour <= DATE_ADD(CURDATE(),INTERVAL 1 DAY)\n" +
+                    "ORDER BY Date_hour ASC;");
+            ResultSet rs2 = ps2.executeQuery(); //execute the sql query reading all the datas in the table product
+
+            java.util.List<String[]> tab_todays_treatements = new ArrayList<>();
+            int i=0;
+            while(rs2.next()) {
+                String[] tab_one_treatment = new String[7];
+
+                String remaining_days = rs2.getString(1);
+                String treatment_dosage = rs2.getString(2);
+                String treatment_name = rs2.getString(3);
+                String[] date_treament = rs2.getString(4).split(" ")[0].split("-");
+                String hour_treatment = rs2.getString(4).split(" ")[1].substring(0,5);
+                //System.out.println(remaining_days+" "+treatment_dosage+" "+treatment_name+" "+date_treament[0]+" "+date_treament[1]+" "+date_treament[2]+" "+hour_treatment);
+                tab_one_treatment[0] = remaining_days;
+                tab_one_treatment[1] = treatment_dosage;
+                tab_one_treatment[2] = treatment_name;
+                tab_one_treatment[3] = date_treament[0];
+                tab_one_treatment[4] = date_treament[1];
+                tab_one_treatment[5] = date_treament[2];
+                tab_one_treatment[6] = hour_treatment;
+                i++;
+                tab_todays_treatements.add(tab_one_treatment);
+            }
+
+
+            DateTimeFormatter actual_time = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+            LocalDateTime now = LocalDateTime.now();
+            //System.out.println(actual_time.format(now));
+
+            //at the end i gives the number of treatments of today
+            //all contained in the list tab_todays_treatements
+            for(int j=0;j<i;j++){
+                Boolean treatment_taken = false;
+                //if it's time create notification
+                //create a notification
+                String[] tab = tab_todays_treatements.get(j);
+                String Date = tab[3] + "/" + tab[4] + "/" + tab[5] + " " + tab[6] ;
+                // we now have Date at the same formart than actual_time.format(now)
+
+                if(actual_time.format(now).matches(Date)){
+                    treatment_taken = CreateNotification(tab_todays_treatements.get(j));
+
+                }
+
+                if(!treatment_taken){
+                    //send an email to the tutor
+                }
+            }
+
         }catch(Exception e) {
             System.out.println(e);
         }
@@ -220,6 +290,23 @@ public class GUI implements ActionListener  {
 
 
     }
+
+    public Boolean CreateNotification(String[] treatment_infos){
+        String treatment_name = treatment_infos[2];
+        Boolean taken = false;
+        int choice = JOptionPane.showConfirmDialog(null,"Click ok to check your treatment",treatment_name+" treatment",JOptionPane.YES_OPTION);
+        if(choice == 0){
+            frame.dispose();
+            Notification_page new_notif_window = new Notification_page(treatment_infos);
+            taken = new_notif_window.getTreatment_taken();
+        }
+        //return 0 for yes
+        //1 for no
+        //-1 if closed
+        return taken;
+
+    }
+
 
 }
 

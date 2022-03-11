@@ -43,8 +43,9 @@ CREATE TABLE Medical_Appointments(
 );
 
 INSERT INTO Dosing_Time (idDate,Date_hour,taken) VALUES 
-('1','2022-03-10 11:30:00','1'),
-('2','2022-03-10 15:30:00','0');
+('1','2022-03-11 11:30:00','1'),
+('2','2022-03-11 15:30:00','0'),
+('3','2022-03-15 15:30:00','0');
 
 INSERT INTO Tutor (mail_tutor, Name) VALUES 
 ('j.g@gmail.com','Jérémy GRELAUD');
@@ -54,7 +55,8 @@ INSERT INTO Users (id_user,mail,password,mail_tutor) VALUES
 
 INSERT INTO Treatment_list (idTreatment,Remaining_Days,Dosage,Name,id_user,idDate) VALUES 
 ('1','7','50 mL','paracétamol','1','1'),
-('2','30','1 comprimé','aerius','1','2');
+('2','30','1 comprimé','aerius','1','2'),
+('3','2','2 comprimés','spasfond','1','3');
 
 INSERT INTO Medical_Appointments (id_appointment,date_appointment,Name_doctor,Adress,id_user) VALUES
 ('1','2022-04-15 16:50:00','Perrin','5 rue de la Bergerie Poitier','1'),
@@ -88,5 +90,16 @@ ORDER BY date_appointment ASC LIMIT 1;
 SELECT Tutor.mail_tutor, Tutor.Name
 FROM Users INNER JOIN Tutor ON Tutor.mail_tutor = Users.mail_tutor
 WHERE id_user='1';
+
+
+
+/*get all the hours of todays treatments*/
+SELECT Remaining_Days, Dosage, Name,  Date_hour
+FROM Treatment_list INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate
+WHERE id_user='1' AND Date_hour >= Date(now()) AND Date_hour <= DATE_ADD(CURDATE(),INTERVAL 1 DAY)
+ORDER BY Date_hour ASC;
+
+
+/*SELECT DATE_ADD(CURDATE(),INTERVAL 1 DAY) AS tomorrow;*/
 
 commit;
