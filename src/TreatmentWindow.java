@@ -55,7 +55,7 @@ public class TreatmentWindow implements ActionListener {
                 String datetime = rs.getString(4);
                 String[] tab = datetime.split(" ");
                 l4.setText(tab[0]);
-                l5.setText(tab[1]);
+                l5.setText(tab[1].substring(0,5).split(":")[0]+"h"+tab[1].substring(0,5).split(":")[1]);
 
                 l6 = new JLabel("",SwingConstants.CENTER);
                 String taken = rs.getString(5);

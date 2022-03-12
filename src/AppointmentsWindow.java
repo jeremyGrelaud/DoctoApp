@@ -44,7 +44,7 @@ public class AppointmentsWindow implements ActionListener {
                 String datetime = rs.getString(1);
                 String[] tab_date = datetime.split(" ");
                 l1.setText(tab_date[0]);
-                l2.setText(tab_date[1]);
+                l2.setText(tab_date[1].substring(0,5).split(":")[0]+"h"+tab_date[1].substring(0,5).split(":")[1]);
                 l3 = new JLabel("",SwingConstants.CENTER);
                 l3.setText(rs.getString(2));
                 l4 = new JLabel("",SwingConstants.CENTER);
