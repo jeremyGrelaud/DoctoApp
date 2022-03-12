@@ -12,20 +12,19 @@ public class TutorWindow implements ActionListener {
 
     private JFrame frame = new JFrame();
     private JButton button_return_to_menu;
-
-    TutorWindow() {
-
+    private int id_user;
+    TutorWindow(int id_user) {
+        this.id_user=id_user;
 
         JPanel p = new JPanel();
         try {
-            int id_user = 1; //faire une variable static ou globale qu'on init au debut de la connection
 
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
 
             PreparedStatement ps = con.prepareStatement("SELECT Tutor.mail_tutor, Tutor.Name\n" +
-                    "FROM Users INNER JOIN Tutor ON Tutor.mail_tutor = Users.mail_tutor\n" +
-                    "WHERE id_user='"+id_user+"';\n");
+                    "FROM Users INNER JOIN Tutor ON Tutor.id_user = Users.id_user\n" +
+                    "WHERE Users.id_user='"+id_user+"';");
             ResultSet rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product
 
             //header of our table
@@ -87,7 +86,7 @@ public class TutorWindow implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI();
+            GUI menu_window = new GUI(this.id_user);
         }
     }
 }

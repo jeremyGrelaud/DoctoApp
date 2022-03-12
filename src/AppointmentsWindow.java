@@ -12,16 +12,17 @@ public class AppointmentsWindow implements ActionListener {
 
     private JFrame frame = new JFrame();
     private JButton button_return_to_menu;
+    private int id_user;
 
-    AppointmentsWindow() {
-
+    AppointmentsWindow(int id_user) {
+        this.id_user=id_user;
         JPanel p = new JPanel();
         try {
-            int user_id=1;
+            //int res = getId_user_connected();
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
 
-            PreparedStatement ps = con.prepareStatement("SELECT date_appointment, Name_doctor, Adress FROM Medical_Appointments WHERE id_user='"+user_id+"';");
+            PreparedStatement ps = con.prepareStatement("SELECT date_appointment, Name_doctor, Adress FROM Medical_Appointments WHERE id_user='"+id_user+"';");
             ResultSet rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product
 
             //header of our table
@@ -96,7 +97,7 @@ public class AppointmentsWindow implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI();
+            GUI menu_window = new GUI(this.id_user);
         }
     }
 }

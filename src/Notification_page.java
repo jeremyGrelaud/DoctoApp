@@ -10,8 +10,10 @@ public class Notification_page implements ActionListener {
     private JButton button_confirm;
 
     private Boolean treatment_taken;
+    private int id_user;
 
-    public Notification_page(String[] treatment_infos){
+    public Notification_page(String[] treatment_infos, int id_user){
+        this.id_user=id_user;
 
         this.treatment_taken = false;
 
@@ -118,12 +120,12 @@ public class Notification_page implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI();
+            GUI menu_window = new GUI(this.id_user);
         }
         if(e.getSource() == button_confirm){
             this.treatment_taken = true;
             frame.dispose();
-            GUI menu_window = new GUI();
+            GUI menu_window = new GUI(this.id_user);
             //et il faudrait qu'on retourne un truc qui dit que le traitment a été pris ...
         }
     }

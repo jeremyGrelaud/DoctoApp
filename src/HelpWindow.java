@@ -7,8 +7,9 @@ public class HelpWindow implements ActionListener {
 
     private JFrame frame = new JFrame();
     private JButton button_return_to_menu;
-
-    HelpWindow() {
+    private int id_user;
+    HelpWindow(int id_user) {
+        this.id_user=id_user;
         //creating a button allowing to go back to the main menu
         button_return_to_menu = new JButton("Return to menu");
         button_return_to_menu.setSize(200, 80);
@@ -35,7 +36,7 @@ public class HelpWindow implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI();
+            GUI menu_window = new GUI(this.id_user);
         }
     }
 }

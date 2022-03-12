@@ -12,13 +12,13 @@ public class TreatmentWindow implements ActionListener {
 
     private JFrame frame = new JFrame();
     private JButton button_return_to_menu;
-
-    TreatmentWindow() {
+    private int id_user;
+    TreatmentWindow(int id_user) {
 
 
         JPanel p = new JPanel();
         try {
-            int id_user=1;
+            this.id_user = id_user;
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
 
@@ -116,7 +116,7 @@ public class TreatmentWindow implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI();
+            GUI menu_window = new GUI(this.id_user);
         }
     }
 }

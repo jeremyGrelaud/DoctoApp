@@ -1,3 +1,10 @@
+CREATE TABLE Users(
+   id_user INT,
+   mail VARCHAR(50) NOT NULL,
+   password VARCHAR(50),
+   PRIMARY KEY(id_user)
+);
+
 CREATE TABLE Dosing_Time(
    idDate INT,
    Date_hour DATETIME,
@@ -8,16 +15,19 @@ CREATE TABLE Dosing_Time(
 CREATE TABLE Tutor(
    mail_tutor VARCHAR(50),
    Name VARCHAR(50),
-   PRIMARY KEY(mail_tutor)
+   id_user INT NOT NULL,
+   PRIMARY KEY(mail_tutor),
+   FOREIGN KEY(id_user) REFERENCES Users(id_user)
 );
 
-CREATE TABLE Users(
-   id_user INT,
-   mail VARCHAR(50) NOT NULL,
-   password VARCHAR(50),
-   mail_tutor VARCHAR(50) NOT NULL,
-   PRIMARY KEY(id_user),
-   FOREIGN KEY(mail_tutor) REFERENCES Tutor(mail_tutor)
+CREATE TABLE Medical_Appointments(
+   id_appointment INT,
+   date_appointment DATETIME,
+   Name_doctor VARCHAR(50),
+   Adress VARCHAR(50),
+   id_user INT NOT NULL,
+   PRIMARY KEY(id_appointment),
+   FOREIGN KEY(id_user) REFERENCES Users(id_user)
 );
 
 CREATE TABLE Treatment_list(
@@ -32,26 +42,17 @@ CREATE TABLE Treatment_list(
    FOREIGN KEY(idDate) REFERENCES Dosing_Time(idDate)
 );
 
-CREATE TABLE Medical_Appointments(
-   id_appointment INT,
-   date_appointment DATETIME,
-   Name_doctor VARCHAR(50),
-   Adress VARCHAR(50),
-   id_user INT NOT NULL,
-   PRIMARY KEY(id_appointment),
-   FOREIGN KEY(id_user) REFERENCES Users(id_user)
-);
+INSERT INTO Users (id_user,mail,password) VALUES 
+('1','gui@gmail.com','1234');
 
 INSERT INTO Dosing_Time (idDate,Date_hour,taken) VALUES 
 ('1','2022-03-11 11:30:00','1'),
 ('2','2022-03-11 15:30:00','0'),
 ('3','2022-03-15 15:30:00','0');
 
-INSERT INTO Tutor (mail_tutor, Name) VALUES 
-('j.g@gmail.com','Jérémy GRELAUD');
+INSERT INTO Tutor (mail_tutor, Name, id_user) VALUES 
+('j.g@gmail.com','Jérémy GRELAUD','1');
 
-INSERT INTO Users (id_user,mail,password,mail_tutor) VALUES 
-('1','gui@gmail;com','1234','j.g@gmail.com');
 
 INSERT INTO Treatment_list (idTreatment,Remaining_Days,Dosage,Name,id_user,idDate) VALUES 
 ('1','7','50 mL','paracétamol','1','1'),
@@ -88,8 +89,8 @@ ORDER BY date_appointment ASC LIMIT 1;
 
 /*To get tutor's info*/
 SELECT Tutor.mail_tutor, Tutor.Name
-FROM Users INNER JOIN Tutor ON Tutor.mail_tutor = Users.mail_tutor
-WHERE id_user='1';
+FROM Users INNER JOIN Tutor ON Tutor.id_user = Users.id_user
+WHERE Users.id_user='1';
 
 
 
@@ -101,5 +102,13 @@ ORDER BY Date_hour ASC;
 
 
 /*SELECT DATE_ADD(CURDATE(),INTERVAL 1 DAY) AS tomorrow;*/
+
+
+SELECT id_user, password
+FROM users
+WHERE mail='gui@gmail.com';
+
+SELECT max(id_user)
+FROM users;
 
 commit;

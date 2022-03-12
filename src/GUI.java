@@ -1,14 +1,3 @@
-//import com.sun.javafx.css.Stylesheet;
-//import com.sun.javafx.css.parser.CSSParser;
-
-import javafx.embed.swing.JFXPanel;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.layout.StackPane;
-
-import javax.management.Notification;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,8 +9,6 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Optional;
-import javax.swing.Popup;
 
 
 public class GUI implements ActionListener  {
@@ -31,14 +18,16 @@ public class GUI implements ActionListener  {
     private JPanel panel;
     private JButton treatment, tutor, appointments, help;
 
+    private int id_user;
+
     //constructor
-    public GUI() {
+    public GUI(int id_user) {
+        this.id_user = id_user;
 
         try {
             String date_next_appointment=null;
-            String[] hour_next_appointment=null;
+            String[] hour_next_appointment= null;
             String doctor_next_appointment=null;
-            int id_user=1;
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
 
@@ -63,11 +52,17 @@ public class GUI implements ActionListener  {
 
             panel.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
-
-            JLabel label = new JLabel("Your next appointment is on : " + date_next_appointment
-                    +"\n At "+ hour_next_appointment[0] + "h" + hour_next_appointment[1]
-                    +"\n With Doctor : " + doctor_next_appointment, SwingConstants.CENTER);
-            label.setFont(new Font("Verdana", Font.PLAIN, 18));
+            JLabel label;
+            if(date_next_appointment!=null && hour_next_appointment!=null && doctor_next_appointment!=null){
+                label = new JLabel("Your next appointment is on : " + date_next_appointment
+                        +"\n At "+ hour_next_appointment[0] + "h" + hour_next_appointment[1]
+                        +"\n With Doctor : " + doctor_next_appointment, SwingConstants.CENTER);
+                label.setFont(new Font("Verdana", Font.PLAIN, 18));
+            }
+            else{
+                label = new JLabel("You don't have any appointment", SwingConstants.CENTER);
+                label.setFont(new Font("Verdana", Font.PLAIN, 18));
+            }
 
             //ImageIcon icon_next_appointment = new ImageIcon("..\\Images\\schedule.png");
             ImageIcon icon_next_appointment = new ImageIcon("D:\\Efrei\\L3\\semestre 6\\OO_UML\\Project_V2\\DoctoApp\\Images\\schedule.png");
@@ -273,22 +268,20 @@ public class GUI implements ActionListener  {
         if(e.getSource() == treatment){
             //close the actual frame instance
             frame.dispose(); //will close the actual frame
-            TreatmentWindow the_treatment_window = new TreatmentWindow();
+            TreatmentWindow the_treatment_window = new TreatmentWindow(this.id_user);
         }
         else if(e.getSource() == tutor){
             frame.dispose();
-            TutorWindow the_tutor_window = new TutorWindow();
+            TutorWindow the_tutor_window = new TutorWindow(this.id_user);
         }
         else if(e.getSource() == appointments){
             frame.dispose();
-            AppointmentsWindow the_appointments_window = new AppointmentsWindow();
+            AppointmentsWindow the_appointments_window = new AppointmentsWindow(this.id_user);
         }
         else if(e.getSource() == help){
             frame.dispose();
-            HelpWindow the_help_window = new HelpWindow();
+            HelpWindow the_help_window = new HelpWindow(this.id_user);
         }
-
-
     }
 
     public Boolean CreateNotification(String[] treatment_infos){
@@ -297,7 +290,7 @@ public class GUI implements ActionListener  {
         int choice = JOptionPane.showConfirmDialog(null,"Click ok to check your treatment",treatment_name+" treatment",JOptionPane.YES_OPTION);
         if(choice == 0){
             frame.dispose();
-            Notification_page new_notif_window = new Notification_page(treatment_infos);
+            Notification_page new_notif_window = new Notification_page(treatment_infos, this.id_user);
             taken = new_notif_window.getTreatment_taken();
         }
         //return 0 for yes
