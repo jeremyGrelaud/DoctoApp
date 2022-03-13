@@ -46,8 +46,7 @@ public class Login implements ActionListener {
         String passValue = textFieldPassword.getText();        //get user entered pasword from the textField2
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
 
             PreparedStatement ps = con.prepareStatement("SELECT id_user, password\n" +
                     "            FROM users\n" +

@@ -70,8 +70,9 @@ public class GUI implements ActionListener {
             String date_next_appointment = null;
             String[] hour_next_appointment = null;
             String doctor_next_appointment = null;
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
+
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
+
 
             PreparedStatement ps = con.prepareStatement("SELECT date_appointment,  Name_doctor\n" +
                     "FROM Medical_Appointments\n" +
@@ -248,8 +249,7 @@ public class GUI implements ActionListener {
 
     private void CheckTreatmentsStatus(){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
             /***WE now have to check if the user got treatments to take today to make notifications if needed*/
 
             PreparedStatement ps2 = con.prepareStatement("SELECT Remaining_Days, Dosage, Name,  Date_hour\n" +

@@ -9,13 +9,11 @@ import java.sql.Statement;
 
 public class Register implements ActionListener {
 
-    private int id_user_connected;
-
     //initialize button, panel, label, and text field
     private JButton register_button;
     private JPanel panel;
-    private JLabel userLabel, passLabel, tutorLabel;
-    private JTextField textField1, textField2, textField3;
+    private JLabel userLabel, passLabel;
+    private JTextField textFieldUser, textFieldPassword;
     private JFrame frame = new JFrame();//the frame is the window
 
     //calling constructor
@@ -50,15 +48,15 @@ public class Register implements ActionListener {
 
 
         //create text field to get username from the user
-        textField1 = new JTextField(15);    //set length of the text
-        textField1.setFont(new Font("Verdana", Font.PLAIN, 28));
+        textFieldUser = new JTextField(15);    //set length of the text
+        textFieldUser.setFont(new Font("Verdana", Font.PLAIN, 28));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
         c.gridwidth = 1;
         c.gridx = 1;
         c.gridy = 0;
         c.insets = new Insets(0, 20, 20, 20);  //top padding
-        panel.add(textField1, c);
+        panel.add(textFieldUser, c);
 
         //create label for password
         passLabel = new JLabel("", SwingConstants.CENTER);
@@ -74,15 +72,15 @@ public class Register implements ActionListener {
 
 
         //create text field to get password from the user
-        textField2 = new JPasswordField(15);    //set length for the password
-        textField2.setFont(new Font("Verdana", Font.PLAIN, 28));
+        textFieldPassword = new JPasswordField(15);    //set length for the password
+        textFieldPassword.setFont(new Font("Verdana", Font.PLAIN, 28));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
         c.gridwidth = 1;
         c.gridx = 1;
         c.gridy = 1;
         c.insets = new Insets(0, 20, 20, 20);  //top padding
-        panel.add(textField2, c);
+        panel.add(textFieldPassword, c);
 
 
         //create button to register as a new user
@@ -110,13 +108,11 @@ public class Register implements ActionListener {
     }
 
     private void ValidateRegister(){
-        String email = textField1.getText();
-        String password = textField2.getText();
+        String email = textFieldUser.getText();
+        String password = textFieldPassword.getText();
 
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
-            //product_inventory is database name, root is username and the password is also root
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
 
             Statement statement = con.createStatement();
 

@@ -30,8 +30,7 @@ public class TreatmentWindow implements ActionListener {
 
     private void DisplayTreatments(int id_user){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
 
             PreparedStatement ps = con.prepareStatement("SELECT  Treatment_list.Name,Treatment_list.Remaining_Days , Treatment_list.Dosage, Dosing_Time.Date_hour, Dosing_Time.taken\n" +
                     "FROM Treatment_list INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate\n" +

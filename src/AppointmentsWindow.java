@@ -32,8 +32,7 @@ public class AppointmentsWindow implements ActionListener {
     private void DisplayAppointments(int id_user){
         try {
             //int res = getId_user_connected();
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
 
             PreparedStatement ps = con.prepareStatement("SELECT date_appointment, Name_doctor, Adress FROM Medical_Appointments WHERE id_user='"+id_user+"';");
             ResultSet rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product

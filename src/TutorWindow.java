@@ -31,8 +31,7 @@ public class TutorWindow implements ActionListener {
 
     private void DisplayTutor(int id_user) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
 
             PreparedStatement ps = con.prepareStatement("SELECT Tutor.mail_tutor, Tutor.Name\n" +
                     "FROM Users INNER JOIN Tutor ON Tutor.id_user = Users.id_user\n" +
