@@ -12,10 +12,10 @@ public class Register implements ActionListener {
     private int id_user_connected;
 
     //initialize button, panel, label, and text field
-    JButton register_button;
-    JPanel panel;
-    JLabel userLabel, passLabel, tutorLabel;
-    JTextField textField1, textField2, textField3;
+    private JButton register_button;
+    private JPanel panel;
+    private JLabel userLabel, passLabel, tutorLabel;
+    private JTextField textField1, textField2, textField3;
     private JFrame frame = new JFrame();//the frame is the window
 
     //calling constructor

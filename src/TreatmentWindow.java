@@ -128,5 +128,8 @@ public class TreatmentWindow implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
 
     }
+
+    //private void AddTreatment(){
+    //}
 }
 

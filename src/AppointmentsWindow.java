@@ -13,7 +13,7 @@ public class AppointmentsWindow implements ActionListener {
     private JFrame frame = new JFrame();
     private JButton button_return_to_menu;
     private int id_user;
-    JPanel p = new JPanel();
+    private JPanel p = new JPanel();
 
     AppointmentsWindow(int id_user) {
         this.id_user=id_user;
@@ -102,5 +102,8 @@ public class AppointmentsWindow implements ActionListener {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
     }
+
+    //private void AddAppointment(){
+    //}
 }
 

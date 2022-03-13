@@ -14,8 +14,9 @@ public class TutorWindow implements ActionListener {
     private JButton button_return_to_menu;
     private int id_user;
     private JPanel p = new JPanel();
+
     TutorWindow(int id_user) {
-        this.id_user=id_user;
+        this.id_user = id_user;
         DisplayTutor(id_user);
     }
 
@@ -28,39 +29,41 @@ public class TutorWindow implements ActionListener {
         }
     }
 
-    private void DisplayTutor(int id_user){
+    private void DisplayTutor(int id_user) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
 
             PreparedStatement ps = con.prepareStatement("SELECT Tutor.mail_tutor, Tutor.Name\n" +
                     "FROM Users INNER JOIN Tutor ON Tutor.id_user = Users.id_user\n" +
-                    "WHERE Users.id_user='"+id_user+"';");
+                    "WHERE Users.id_user='" + id_user + "';");
             ResultSet rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product
 
             //header of our table
             JLabel h1 = new JLabel("Guardian mail", SwingConstants.CENTER);
             JLabel h2 = new JLabel("Guardian Name", SwingConstants.CENTER);
-            p.add(h1);p.add(h2);
+            p.add(h1);
+            p.add(h2);
 
             // create a line border with the specified color and width
             Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2);
 
             //while loop to add each datas of each rows/products in the database
-            JLabel l1 =null,l2=null;
-            p.setLayout(new GridLayout(1,2));
-            int row=2;
-            while(rs.next()) {
-                l1 = new JLabel("",SwingConstants.CENTER);
+            JLabel l1 = null, l2 = null;
+            p.setLayout(new GridLayout(1, 2));
+            int row = 2;
+            while (rs.next()) {
+                l1 = new JLabel("", SwingConstants.CENTER);
                 l1.setText(rs.getString(1));
-                l2 = new JLabel("",SwingConstants.CENTER);
+                l2 = new JLabel("", SwingConstants.CENTER);
                 l2.setText(rs.getString(2));
 
                 l1.setBorder(border);
                 l2.setBorder(border);
 
-                p.add(l1);p.add(l2);
-                p.setLayout(new GridLayout(row,2));
+                p.add(l1);
+                p.add(l2);
+                p.setLayout(new GridLayout(row, 2));
                 row++;
             }
 
@@ -73,7 +76,7 @@ public class TutorWindow implements ActionListener {
 
 
             p.setBackground(Color.white); //set the color of the window's background
-            p.setBounds(150,150,350,150); //set the coordinates of the pannel = gridlayout
+            p.setBounds(150, 150, 350, 150); //set the coordinates of the pannel = gridlayout
             frame.add(p);
 
             frame.setLayout(null);
@@ -87,9 +90,12 @@ public class TutorWindow implements ActionListener {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
 
 
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
+
+    //private void ModifyTutorInfos(){
+    //}
 }
 

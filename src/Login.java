@@ -12,10 +12,10 @@ public class Login implements ActionListener {
     private int id_user_connected;
 
     //initialize button, panel, label, and text field
-    JButton login_button, register_button;
-    JPanel panel;
-    JLabel userLabel, passLabel;
-    JTextField textFieldEmail, textFieldPassword;
+    private JButton login_button, register_button;
+    private JPanel panel;
+    private JLabel userLabel, passLabel;
+    private JTextField textFieldEmail, textFieldPassword;
     private JFrame frame = new JFrame();//the frame is the window
 
     //calling constructor

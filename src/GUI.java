@@ -23,7 +23,49 @@ public class GUI implements ActionListener {
     //constructor
     public GUI(int id_user) {
         this.id_user = id_user;
+        DisplayGUI(id_user);
+    }
 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //action when the button is clicked
+        if (e.getSource() == treatment) {
+            //close the actual frame instance
+            frame.dispose(); //will close the actual frame
+            TreatmentWindow the_treatment_window = new TreatmentWindow(this.id_user);
+        } else if (e.getSource() == tutor) {
+            frame.dispose();
+            TutorWindow the_tutor_window = new TutorWindow(this.id_user);
+        } else if (e.getSource() == appointments) {
+            frame.dispose();
+            AppointmentsWindow the_appointments_window = new AppointmentsWindow(this.id_user);
+        } else if (e.getSource() == help) {
+            frame.dispose();
+            HelpWindow the_help_window = new HelpWindow(this.id_user);
+        }
+    }
+
+    public Boolean CreateNotification(String[] treatment_infos) {
+        String treatment_name = treatment_infos[2];
+        Boolean taken = false;
+        int choice = JOptionPane.showConfirmDialog(null, "Click ok to check your treatment", treatment_name + " treatment", JOptionPane.YES_OPTION);
+        if (choice == 0) {
+            frame.dispose();
+            Notification_page new_notif_window = new Notification_page(treatment_infos, this.id_user);
+            taken = new_notif_window.getTreatment_taken();
+        }
+        //return 0 for yes
+        //1 for no
+        //-1 if closed
+        return taken;
+
+    }
+
+    //public Boolean SendEmail(String GuardianEmail){
+   // }
+
+    private void DisplayGUI(int id_user){
         try {
             String date_next_appointment = null;
             String[] hour_next_appointment = null;
@@ -196,7 +238,18 @@ public class GUI implements ActionListener {
             frame.setVisible(true);
             frame.setResizable(true);
 
+            //we check if we have to notify the user of one of his treatment
+            CheckTreatmentsStatus();
 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void CheckTreatmentsStatus(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
             /***WE now have to check if the user got treatments to take today to make notifications if needed*/
 
             PreparedStatement ps2 = con.prepareStatement("SELECT Remaining_Days, Dosage, Name,  Date_hour\n" +
@@ -251,52 +304,11 @@ public class GUI implements ActionListener {
                     //send an email to the tutor
                 }
             }
-
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //action when the button is clicked
-        if (e.getSource() == treatment) {
-            //close the actual frame instance
-            frame.dispose(); //will close the actual frame
-            TreatmentWindow the_treatment_window = new TreatmentWindow(this.id_user);
-        } else if (e.getSource() == tutor) {
-            frame.dispose();
-            TutorWindow the_tutor_window = new TutorWindow(this.id_user);
-        } else if (e.getSource() == appointments) {
-            frame.dispose();
-            AppointmentsWindow the_appointments_window = new AppointmentsWindow(this.id_user);
-        } else if (e.getSource() == help) {
-            frame.dispose();
-            HelpWindow the_help_window = new HelpWindow(this.id_user);
-        }
-    }
-
-    public Boolean CreateNotification(String[] treatment_infos) {
-        String treatment_name = treatment_infos[2];
-        Boolean taken = false;
-        int choice = JOptionPane.showConfirmDialog(null, "Click ok to check your treatment", treatment_name + " treatment", JOptionPane.YES_OPTION);
-        if (choice == 0) {
-            frame.dispose();
-            Notification_page new_notif_window = new Notification_page(treatment_infos, this.id_user);
-            taken = new_notif_window.getTreatment_taken();
-        }
-        //return 0 for yes
-        //1 for no
-        //-1 if closed
-        return taken;
 
     }
-
-    //public Boolean SendEmail(String GuardianEmail){
-   // }
-
-
 
 }
 
