@@ -1,6 +1,7 @@
 *{
 	font-family: "Ubuntu", sans-serif;
 	box-sizing: border-box; 
+    
 }
 
 html {
@@ -12,6 +13,12 @@ html {
 body{
     /* background-color: lightsalmon;*/
     text-align: center;
+    margin-left: 10vh;
+    margin-right: 10vh;
+}
+img{
+    margin-bottom: 5vh;
+    margin-top: 5vh;
 }
 
 ul {
@@ -23,4 +30,17 @@ ul {
 h1 {
     font-family: cursive;
     font-style: oblique; 
+    font-size: 13vh;
+}
+
+h2{
+    font-size: 5vh;
+}
+
+p, ul{
+    font-size: 2vh;
+}
+
+#fourth_block img{
+    border-radius: 10vh;
 }
