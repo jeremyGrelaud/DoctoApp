@@ -13,12 +13,23 @@ public class TutorWindow implements ActionListener {
     private JFrame frame = new JFrame();
     private JButton button_return_to_menu;
     private int id_user;
+    private JPanel p = new JPanel();
     TutorWindow(int id_user) {
         this.id_user=id_user;
+        DisplayTutor(id_user);
+    }
 
-        JPanel p = new JPanel();
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //action when the button is clicked
+        if (e.getSource() == button_return_to_menu) {
+            frame.dispose();
+            GUI menu_window = new GUI(this.id_user);
+        }
+    }
+
+    private void DisplayTutor(int id_user){
         try {
-
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8","root","root");
 
@@ -78,15 +89,6 @@ public class TutorWindow implements ActionListener {
 
         }catch(Exception e) {
             System.out.println(e);
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //action when the button is clicked
-        if (e.getSource() == button_return_to_menu) {
-            frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
         }
     }
 }

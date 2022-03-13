@@ -20,6 +20,17 @@ public class Register implements ActionListener {
 
     //calling constructor
     Register() {
+        DisplayRegister();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == register_button) {
+            ValidateRegister();
+        }
+    }
+
+    private void DisplayRegister(){
 
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -98,40 +109,37 @@ public class Register implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == register_button) {
-            String email = textField1.getText();
-            String password = textField2.getText();
+    private void ValidateRegister(){
+        String email = textField1.getText();
+        String password = textField2.getText();
 
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
-                //product_inventory is database name, root is username and the password is also root
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8", "root", "root");
+            //product_inventory is database name, root is username and the password is also root
 
-                Statement statement = con.createStatement();
+            Statement statement = con.createStatement();
 
-                //check if the id already exists
-                ResultSet rs = statement.executeQuery("SELECT max(id_user)\n" +
-                        "                    FROM users;");
-                rs.next();
-                int id_new_user_registered = rs.getInt(1)+1;
+            //check if the id already exists
+            ResultSet rs = statement.executeQuery("SELECT max(id_user)\n" +
+                    "                    FROM users;");
+            rs.next();
+            int id_new_user_registered = rs.getInt(1)+1;
 
-                //insert and create user in the database
+            //insert and create user in the database
 
-                statement.executeUpdate("INSERT INTO Users VALUES ('" + id_new_user_registered + "','" + email + "','" + password + "');");
-                con.close();
-                //pop up that informs the user
-                //JOptionPane.showMessageDialog(frame, "Your journey begins now");
+            statement.executeUpdate("INSERT INTO Users VALUES ('" + id_new_user_registered + "','" + email + "','" + password + "');");
+            con.close();
+            //pop up that informs the user
+            //JOptionPane.showMessageDialog(frame, "Your journey begins now");
 
-                System.out.println(id_new_user_registered);
-                frame.dispose(); //dispose of the frame
-                //launch menu page
-                GUI menu_window = new GUI(id_new_user_registered);
+            System.out.println(id_new_user_registered);
+            frame.dispose(); //dispose of the frame
+            //launch menu page
+            GUI menu_window = new GUI(id_new_user_registered);
 
-            }catch(Exception ex){
-                System.out.println(ex);
-            }
+        }catch(Exception ex){
+            System.out.println(ex);
         }
     }
 }

@@ -13,10 +13,23 @@ public class AppointmentsWindow implements ActionListener {
     private JFrame frame = new JFrame();
     private JButton button_return_to_menu;
     private int id_user;
+    JPanel p = new JPanel();
 
     AppointmentsWindow(int id_user) {
         this.id_user=id_user;
-        JPanel p = new JPanel();
+        DisplayAppointments(id_user);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //action when the button is clicked
+        if (e.getSource() == button_return_to_menu) {
+            frame.dispose();
+            GUI menu_window = new GUI(this.id_user);
+        }
+    }
+
+    private void DisplayAppointments(int id_user){
         try {
             //int res = getId_user_connected();
             Class.forName("com.mysql.jdbc.Driver");
@@ -63,42 +76,31 @@ public class AppointmentsWindow implements ActionListener {
                 p.setLayout(new GridLayout(row,4));
                 row++;
             }
-
-            //creating a button allowing to go back to the main menu
-            button_return_to_menu = new JButton("Return to menu");
-            button_return_to_menu.setSize(200, 80);
-            button_return_to_menu.setLocation(350, 50);
-            button_return_to_menu.addActionListener(this);
-            frame.add(button_return_to_menu);
-
-
-            p.setBackground(Color.white); //set the color of the window's background
-            p.setBounds(150,150,600,600); //set the coordinates of the pannel = gridlayout
-            frame.add(p);
-
-            frame.setLayout(null);
-            frame.setVisible(true);
-
-            frame.setSize(900, 900);
-            frame.setTitle("Future Appointments");
-            frame.setBackground(Color.GRAY);
-            frame.setResizable(false);
-
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
-
-
         }catch(Exception e) {
             System.out.println(e);
         }
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //action when the button is clicked
-        if (e.getSource() == button_return_to_menu) {
-            frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
-        }
+        //creating a button allowing to go back to the main menu
+        button_return_to_menu = new JButton("Return to menu");
+        button_return_to_menu.setSize(200, 80);
+        button_return_to_menu.setLocation(350, 50);
+        button_return_to_menu.addActionListener(this);
+        frame.add(button_return_to_menu);
+
+
+        p.setBackground(Color.white); //set the color of the window's background
+        p.setBounds(150,150,600,600); //set the coordinates of the pannel = gridlayout
+        frame.add(p);
+
+        frame.setLayout(null);
+        frame.setVisible(true);
+
+        frame.setSize(900, 900);
+        frame.setTitle("Future Appointments");
+        frame.setBackground(Color.GRAY);
+        frame.setResizable(false);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
     }
 }
 

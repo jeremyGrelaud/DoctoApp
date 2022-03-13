@@ -14,9 +14,30 @@ public class Notification_page implements ActionListener {
 
     public Notification_page(String[] treatment_infos, int id_user){
         this.id_user=id_user;
-
         this.treatment_taken = false;
+        DisplayNotification(treatment_infos,id_user);
+    }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //action when the button is clicked
+        if (e.getSource() == button_return_to_menu) {
+            frame.dispose();
+            GUI menu_window = new GUI(this.id_user);
+        }
+        if(e.getSource() == button_confirm){
+            this.treatment_taken = true;
+            frame.dispose();
+            GUI menu_window = new GUI(this.id_user);
+            //et il faudrait qu'on retourne un truc qui dit que le traitment a été pris ...
+        }
+    }
+
+    public Boolean getTreatment_taken() {
+        return treatment_taken;
+    }
+
+    private void DisplayNotification(String[] treatment_infos, int id_user){
         String remaining_days = treatment_infos[0];
         String treatment_dosage = treatment_infos[1];
         String treatment_name = treatment_infos[2];
@@ -112,25 +133,5 @@ public class Notification_page implements ActionListener {
         frame.setResizable(false);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //action when the button is clicked
-        if (e.getSource() == button_return_to_menu) {
-            frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
-        }
-        if(e.getSource() == button_confirm){
-            this.treatment_taken = true;
-            frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
-            //et il faudrait qu'on retourne un truc qui dit que le traitment a été pris ...
-        }
-    }
-
-    public Boolean getTreatment_taken() {
-        return treatment_taken;
     }
 }
