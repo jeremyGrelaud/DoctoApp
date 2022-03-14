@@ -63,6 +63,8 @@ INSERT INTO Medical_Appointments (id_appointment,date_appointment,Name_doctor,Ad
 ('1','2022-04-15 16:50:00','Perrin','5 rue de la Bergerie Poitier','1'),
 ('2','2022-03-18 17:00:00','Perrin','5 rue de la Bergerie Poitier','1');
 
+
+
 /*To get the id of the user who just connected with his mail and his password*/
 SELECT id_user 
 FROM Users
@@ -117,4 +119,8 @@ UPDATE Tutor
 SET mail_tutor = 'j.g@gmail.com', Name = 'Jérémy GRELAUD'
 WHERE id_user = '1';
     
+/*get the actual max id in the DB*/    
+SELECT Max(id_appointment)
+FROM Medical_Appointments;
+
 commit;

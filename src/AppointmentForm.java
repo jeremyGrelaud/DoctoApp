@@ -2,9 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +28,7 @@ public class AppointmentForm implements ActionListener{
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == Submit){
             String NameDoctor_value = NameDoctor_tf.getText();
-            String Adress_value = Adress_tf.getSelectedText();
+            String Adress_value = Adress_tf.getText();
             String Date_value = Date_tf.getText();
 
             AddAppointment(id_user,NameDoctor_value,Adress_value,Date_value);
@@ -161,11 +159,32 @@ public class AppointmentForm implements ActionListener{
             String user = "root";
             String password = "root";
             Connection con = Main.ConnectionTODB(url,user,password);
-            Statement stmt = con.createStatement();
-            System.out.println(Date_tf.getText());
+            PreparedStatement ps = con.prepareStatement("SELECT Max(id_appointment)\n" +
+                    "FROM Medical_Appointments;\n");
 
-            String query = ""; // query to implement
-            stmt.executeQuery(query);
+
+            ResultSet rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product
+            int actual_max_id_DB = -1;
+            while (rs.next()) {
+                actual_max_id_DB = Integer.parseInt(rs.getString(1));
+            }
+
+            if(actual_max_id_DB!=-1){
+                //System.out.println(Date_tf.getText());
+                /**Then insert data in DB*/
+                Statement statement = con.createStatement();
+                statement.executeUpdate("INSERT INTO Medical_Appointments VALUES ('" + (actual_max_id_DB+1) + "','" + Date + "','" + NameDoctor + "','"+Adress+ "','"+id_user+ "');");
+
+                //pop up that informs the user
+                JOptionPane.showMessageDialog(frame, "Appointment added");
+                frame.dispose();
+                AppointmentsWindow appointmentsWindow = new AppointmentsWindow(this.id_user);
+            }
+            else{
+                JOptionPane.showMessageDialog(frame, "Error in the process");
+            }
+
+
             con.close();
         }catch(Exception e){
             System.out.println(e);
