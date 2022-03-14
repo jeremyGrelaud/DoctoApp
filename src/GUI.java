@@ -245,7 +245,7 @@ public class GUI implements ActionListener {
         }
     }
 
-    public void CheckTreatmentsStatus(int id_user){
+    private void CheckTreatmentsStatus(int id_user){
         try{
             Connection con = Main.ConnectionTODB("oop_uml","root","root");
             /***WE now have to check if the user got treatments to take today to make notifications if needed*/
