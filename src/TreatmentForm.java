@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -193,10 +194,40 @@ public class TreatmentForm implements ActionListener{
             Connection con = DriverManager.getConnection(url,user,password);
             Statement stmt = con.createStatement();
 
+            ResultSet rs = stmt.executeQuery("SELECT Max(idTreatment)\n" +
+                    "FROM Treatment_list;\n");
+            int actual_max_id_treatment_DB = -1;
+            while (rs.next()) {
+                actual_max_id_treatment_DB = Integer.parseInt(rs.getString(1));
+            }
+
+            rs = stmt.executeQuery("SELECT Max(idDate)\n" +
+                    "FROM Dosing_Time;\n");
+            int actual_max_id_date_DB = -1;
+            while (rs.next()) {
+                actual_max_id_date_DB = Integer.parseInt(rs.getString(1));
+            }
+
+            if(actual_max_id_treatment_DB!=-1 && actual_max_id_date_DB!=-1){
+                /**Then insert data in DB*/
+                Statement statement = con.createStatement();
+                //create date
+                int date_id = (actual_max_id_date_DB+1);
+                statement.executeUpdate("INSERT INTO Dosing_Time VALUES('"+date_id+"','"+DateHour+"','0')");
+
+                //then create treatment
+                statement.executeUpdate("INSERT INTO Treatment_list VALUES ('" + (actual_max_id_treatment_DB+1) + "','" + Integer.parseInt(RemainingDays) + "','" + Dosage + "','"+Name+ "','"+id_user+ "','"+date_id+"');");
+
+                //pop up that informs the user
+                JOptionPane.showMessageDialog(frame, "Treatment added");
+                frame.dispose();
+                TreatmentWindow treatmentWindow = new TreatmentWindow(this.id_user);
+            }
+            else{
+                JOptionPane.showMessageDialog(frame, "Error in the process");
+            }
 
 
-            String query = ""; // query to implement
-            stmt.executeQuery(query);
             con.close();
         }catch(Exception e){
             System.out.println(e);
