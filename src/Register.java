@@ -127,7 +127,7 @@ public class Register implements ActionListener {
             statement.executeUpdate("INSERT INTO Users VALUES ('" + id_new_user_registered + "','" + email + "','" + password + "');");
             con.close();
             //pop up that informs the user
-            //JOptionPane.showMessageDialog(frame, "Your journey begins now");
+            JOptionPane.showMessageDialog(frame, "Your journey begins now");
 
             //System.out.println(id_new_user_registered);
 

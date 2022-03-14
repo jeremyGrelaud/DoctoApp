@@ -111,4 +111,10 @@ WHERE mail='gui@gmail.com';
 SELECT max(id_user)
 FROM users;
 
+
+/*Query to modify tutor datas from the database*/
+UPDATE Tutor 
+SET mail_tutor = 'j.g@gmail.com', Name = 'Jérémy GRELAUD'
+WHERE id_user = '1';
+    
 commit;

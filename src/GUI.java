@@ -240,7 +240,7 @@ public class GUI implements ActionListener {
             frame.setResizable(true);
 
             //we check if we have to notify the user of one of his treatment
-            CheckTreatmentsStatus();
+            CheckTreatmentsStatus(id_user);
 
 
         } catch (Exception e) {
@@ -248,7 +248,7 @@ public class GUI implements ActionListener {
         }
     }
 
-    private void CheckTreatmentsStatus(){
+    public void CheckTreatmentsStatus(int id_user){
         try{
             Connection con = Main.ConnectionTODB("oop_uml","root","root");
             /***WE now have to check if the user got treatments to take today to make notifications if needed*/
@@ -296,13 +296,13 @@ public class GUI implements ActionListener {
                 String Date = tab[3] + "/" + tab[4] + "/" + tab[5] + " " + tab[6];
                 // we now have Date at the same formart than actual_time.format(now)
 
+                //if it's time for a treatment
                 if (actual_time.format(now).matches(Date)) {
                     treatment_taken = CreateNotification(tab_todays_treatements.get(j));
 
-                }
-
-                if (!treatment_taken) {
-                    //send an email to the tutor
+                    if (!treatment_taken) {
+                        //send an email to the tutor
+                    }
                 }
             }
 

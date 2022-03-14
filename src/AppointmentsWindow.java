@@ -112,6 +112,7 @@ public class AppointmentsWindow implements ActionListener {
         frame.setResizable(false);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
+
     }
 
     private void AddAppointment(){
