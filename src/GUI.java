@@ -242,6 +242,7 @@ public class GUI implements ActionListener {
             //we check if we have to notify the user of one of his treatment
             CheckTreatmentsStatus();
 
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -304,6 +305,7 @@ public class GUI implements ActionListener {
                     //send an email to the tutor
                 }
             }
+
         } catch (Exception e) {
             System.out.println(e);
         }

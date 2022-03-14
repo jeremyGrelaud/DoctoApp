@@ -129,10 +129,12 @@ public class Register implements ActionListener {
             //pop up that informs the user
             //JOptionPane.showMessageDialog(frame, "Your journey begins now");
 
-            System.out.println(id_new_user_registered);
+            //System.out.println(id_new_user_registered);
+
             frame.dispose(); //dispose of the frame
             //launch menu page
             GUI menu_window = new GUI(id_new_user_registered);
+
 
         }catch(Exception ex){
             System.out.println(ex);

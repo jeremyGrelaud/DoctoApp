@@ -5,18 +5,45 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TreatmentForm implements ActionListener{
     private JFrame frame = new JFrame();
     private JPanel panel;
-    private JButton Submit, button_return_to_menu;
+    private JButton Submit, button_return_to_treatment;
     private int id_user;
     private JLabel Name_label, Dosage_Label, remaining_days_Label, date_hour_Label;
-    private JTextField tf_name, tf_dosage, tf_remaining_days, tf_date_hour;
+    private JTextField tf_name, tf_dosage, tf_remaining_days;
     private Font font = new Font("Verdana",Font.PLAIN,28);
+    private JFormattedTextField tf_date_hour;
 
     public TreatmentForm(int id_user){
         this.id_user = id_user;
+        DisplayTreatmentForm(id_user);
+    }
+
+    //define abstract method actionPerformed() which will be called on button click
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == Submit){
+            String Namevalue = tf_name.getText();
+            String Dosagevalue = tf_dosage.getText();
+            String Remaining_Days_value = tf_remaining_days.getText();
+            String DateHour_value = tf_date_hour.getText();
+
+            AddTreatment(id_user, Namevalue,Dosagevalue,Remaining_Days_value, DateHour_value);
+
+        }
+        if (e.getSource() == button_return_to_treatment) {
+            frame.dispose();
+            TreatmentWindow treatmentWindow = new TreatmentWindow(this.id_user);
+        }
+    }
+
+    private void DisplayTreatmentForm(int id_user){
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -43,7 +70,7 @@ public class TreatmentForm implements ActionListener{
         c.gridy = 0;
         c.insets = new Insets(0,20,20,20);
         panel.add(tf_name,c);
-        
+
         // Create Dosage label
         Dosage_Label = new JLabel("",SwingConstants.CENTER);
         Dosage_Label.setText("Dosage");
@@ -103,7 +130,13 @@ public class TreatmentForm implements ActionListener{
         panel.add(date_hour_Label,c);
 
         //Create Date Hour textfield
-        tf_date_hour = new JTextField(20);
+        //Create Date appointment textfield
+        tf_date_hour = new JFormattedTextField(("yyyy-MM-dd HH:mm"));
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dateString = formatter.format(date);
+        tf_date_hour.setColumns(20);
+        tf_date_hour.setText(dateString);
         tf_date_hour.setFont(font);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
@@ -113,8 +146,9 @@ public class TreatmentForm implements ActionListener{
         c.insets = new Insets(0,20,20,20);
         panel.add(tf_date_hour,c);
 
+
         //Create submit Button
-        Submit = new JButton("Submit");
+        Submit = new JButton("Add treatment");
         Submit.setFont(font);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
@@ -125,19 +159,20 @@ public class TreatmentForm implements ActionListener{
         panel.add(Submit,c);
 
         //Create return to menu Button
-        button_return_to_menu = new JButton("Return to menu");
-        button_return_to_menu.setFont(font);
+        button_return_to_treatment = new JButton("Return to treatments");
+        button_return_to_treatment.setFont(font);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 5;
         c.insets = new Insets(20,20,20,20);
-        panel.add(button_return_to_menu,c);
+        panel.add(button_return_to_treatment,c);
 
         //perform action
         Submit.addActionListener(this);
-        button_return_to_menu.addActionListener(this);
+        button_return_to_treatment.addActionListener(this);
+
 
         frame.add(panel);
         frame.setSize(900,600); //set the size
@@ -145,23 +180,8 @@ public class TreatmentForm implements ActionListener{
         frame.setResizable(false);
         frame.setTitle("Treatment Form");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // for the exit cross
-    }
 
-    //define abstract method actionPerformed() which will be called on button click
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource() == Submit){
-            String Namevalue = tf_name.getText();
-            String Dosagevalue = tf_dosage.getText();
-            String Remaining_Days_value = tf_remaining_days.getText();
-            String DateHour_value = tf_date_hour.getText();
 
-            AddTreatment(id_user, Namevalue,Dosagevalue,Remaining_Days_value, DateHour_value);
-
-        }
-        if (e.getSource() == button_return_to_menu) {
-            frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
-        }
     }
 
     public void AddTreatment(int id_user, String Name, String Dosage, String RemainingDays, String DateHour){
@@ -172,6 +192,9 @@ public class TreatmentForm implements ActionListener{
             String password = "root";
             Connection con = DriverManager.getConnection(url,user,password);
             Statement stmt = con.createStatement();
+
+
+
             String query = ""; // query to implement
             stmt.executeQuery(query);
             con.close();

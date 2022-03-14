@@ -15,6 +15,8 @@ public class AppointmentsWindow implements ActionListener {
     private int id_user;
     private JPanel p = new JPanel();
 
+    private JButton button_add_appointment;
+
     AppointmentsWindow(int id_user) {
         this.id_user=id_user;
         DisplayAppointments(id_user);
@@ -26,6 +28,9 @@ public class AppointmentsWindow implements ActionListener {
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
             GUI menu_window = new GUI(this.id_user);
+        }
+        if(e.getSource() == button_add_appointment){
+            AddAppointment();
         }
     }
 
@@ -75,6 +80,8 @@ public class AppointmentsWindow implements ActionListener {
                 p.setLayout(new GridLayout(row,4));
                 row++;
             }
+
+            con.close();
         }catch(Exception e) {
             System.out.println(e);
         }
@@ -86,6 +93,11 @@ public class AppointmentsWindow implements ActionListener {
         button_return_to_menu.addActionListener(this);
         frame.add(button_return_to_menu);
 
+        button_add_appointment = new JButton("Add an appointment");
+        button_add_appointment.setSize(200, 80);
+        button_add_appointment.setLocation(350, 765);
+        button_add_appointment.addActionListener(this);
+        frame.add(button_add_appointment);
 
         p.setBackground(Color.white); //set the color of the window's background
         p.setBounds(150,150,600,600); //set the coordinates of the pannel = gridlayout
@@ -102,7 +114,9 @@ public class AppointmentsWindow implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
     }
 
-    //private void AddAppointment(){
-    //}
+    private void AddAppointment(){
+        frame.dispose();
+        AppointmentForm appointment_form_window = new AppointmentForm(this.id_user);
+    }
 }
 

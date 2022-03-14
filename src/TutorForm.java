@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class TutorForm implements ActionListener{
     private JFrame frame = new JFrame();
     private JPanel panel;
-    private JButton Submit, button_return_to_menu;
+    private JButton Submit, button_return_to_tutor;
     private int id_user;
     private JLabel NameTutor_label, MailTutor_label;
     private JTextField NameTutor_tf, MailTutor_tf;
@@ -17,6 +17,10 @@ public class TutorForm implements ActionListener{
 
     public TutorForm(int id_user){
         this.id_user = id_user;
+        DisplayTutorForm(id_user);
+    }
+
+    private void DisplayTutorForm(int id_user){
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -68,7 +72,7 @@ public class TutorForm implements ActionListener{
         panel.add(MailTutor_tf,c);
 
         //Create Submit Button
-        Submit = new JButton("Submit");
+        Submit = new JButton("Save");
         Submit.setFont(font);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
@@ -79,19 +83,19 @@ public class TutorForm implements ActionListener{
         panel.add(Submit,c);
 
         //Create return to menu Button
-        button_return_to_menu = new JButton("Return to menu");
-        button_return_to_menu.setFont(font);
+        button_return_to_tutor = new JButton("Return to Guardian");
+        button_return_to_tutor.setFont(font);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 3;
         c.insets = new Insets(20,20,20,20);
-        panel.add(button_return_to_menu,c);
+        panel.add(button_return_to_tutor,c);
 
         //perform action
         Submit.addActionListener(this);
-        button_return_to_menu.addActionListener(this);
+        button_return_to_tutor.addActionListener(this);
 
         frame.add(panel);
         frame.setSize(900,600); //set the size
@@ -99,7 +103,6 @@ public class TutorForm implements ActionListener{
         frame.setResizable(false);
         frame.setTitle("Tutor Form");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // for the exit cross
-
     }
 
     //define abstract method actionPerformed() which will be called on button click
@@ -110,9 +113,9 @@ public class TutorForm implements ActionListener{
 
             AddTutor(id_user,NameTutor_value,MailTutor_value);
         }
-        if (e.getSource() == button_return_to_menu) {
+        if (e.getSource() == button_return_to_tutor) {
             frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
+            TutorWindow tutorWindow = new TutorWindow(this.id_user);
         }
     }
 

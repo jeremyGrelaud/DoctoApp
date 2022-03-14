@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 public class TutorWindow implements ActionListener {
 
     private JFrame frame = new JFrame();
-    private JButton button_return_to_menu;
+    private JButton button_return_to_menu,modify_tutor;
     private int id_user;
     private JPanel p = new JPanel();
 
@@ -26,6 +26,10 @@ public class TutorWindow implements ActionListener {
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
             GUI menu_window = new GUI(this.id_user);
+        }
+        if(e.getSource() == modify_tutor){
+            frame.dispose();
+            TutorForm tutorForm = new TutorForm(this.id_user);
         }
     }
 
@@ -73,6 +77,12 @@ public class TutorWindow implements ActionListener {
             button_return_to_menu.addActionListener(this);
             frame.add(button_return_to_menu);
 
+            modify_tutor = new JButton("Modify Guardian info");
+            modify_tutor.setSize(200, 80);
+            modify_tutor.setLocation(230, 350);
+            modify_tutor.addActionListener(this);
+            frame.add(modify_tutor);
+
 
             p.setBackground(Color.white); //set the color of the window's background
             p.setBounds(150, 150, 350, 150); //set the coordinates of the pannel = gridlayout
@@ -87,7 +97,7 @@ public class TutorWindow implements ActionListener {
             frame.setResizable(false);
 
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
-
+            con.close();
 
         } catch (Exception e) {
             System.out.println(e);

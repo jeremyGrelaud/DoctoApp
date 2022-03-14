@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 public class TreatmentWindow implements ActionListener {
 
     private JFrame frame = new JFrame();
-    private JButton button_return_to_menu;
+    private JButton button_return_to_menu, add_treatment;
     private int id_user;
     private JPanel p = new JPanel();
     TreatmentWindow(int id_user) {
@@ -25,6 +25,10 @@ public class TreatmentWindow implements ActionListener {
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
             GUI menu_window = new GUI(this.id_user);
+        }
+        if(e.getSource() == add_treatment){
+            frame.dispose();
+            TreatmentForm treatmentForm_window = new TreatmentForm(this.id_user);
         }
     }
 
@@ -99,7 +103,7 @@ public class TreatmentWindow implements ActionListener {
                 p.setLayout(new GridLayout(row, 6));
                 row++;
             }
-
+            con.close();
          }catch(Exception e) {
             System.out.println(e);
         }
@@ -110,6 +114,12 @@ public class TreatmentWindow implements ActionListener {
         button_return_to_menu.setLocation(350, 50);
         button_return_to_menu.addActionListener(this);
         frame.add(button_return_to_menu);
+
+        add_treatment = new JButton("Add a treatment");
+        add_treatment.setSize(200, 80);
+        add_treatment.setLocation(350, 765);
+        add_treatment.addActionListener(this);
+        frame.add(add_treatment);
 
 
         p.setBackground(Color.white); //set the color of the window's background
