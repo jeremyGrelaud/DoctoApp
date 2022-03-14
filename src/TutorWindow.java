@@ -28,8 +28,7 @@ public class TutorWindow implements ActionListener {
             GUI menu_window = new GUI(this.id_user);
         }
         if(e.getSource() == modify_tutor){
-            frame.dispose();
-            TutorForm tutorForm = new TutorForm(this.id_user);
+            ModifyTutorInfos();
         }
     }
 
@@ -104,7 +103,9 @@ public class TutorWindow implements ActionListener {
         }
     }
 
-    //private void ModifyTutorInfos(){
-    //}
+    private void ModifyTutorInfos(){
+        frame.dispose();
+        TutorForm tutorForm = new TutorForm(this.id_user);
+    }
 }
 

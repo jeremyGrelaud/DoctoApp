@@ -27,8 +27,7 @@ public class TreatmentWindow implements ActionListener {
             GUI menu_window = new GUI(this.id_user);
         }
         if(e.getSource() == add_treatment){
-            frame.dispose();
-            TreatmentForm treatmentForm_window = new TreatmentForm(this.id_user);
+            AddTreatment();
         }
     }
 
@@ -138,7 +137,9 @@ public class TreatmentWindow implements ActionListener {
 
     }
 
-    //private void AddTreatment(){
-    //}
+    private void AddTreatment(){
+        frame.dispose();
+        TreatmentForm treatmentForm_window = new TreatmentForm(this.id_user);
+    }
 }
 
