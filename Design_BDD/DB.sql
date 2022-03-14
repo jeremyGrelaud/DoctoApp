@@ -97,7 +97,7 @@ WHERE Users.id_user='1';
 
 
 /*get all the hours of todays treatments*/
-SELECT Remaining_Days, Dosage, Name,  Date_hour
+SELECT Remaining_Days, Dosage, Name,  Date_hour, Dosing_Time.idDate
 FROM Treatment_list INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate
 WHERE id_user='1' AND Date_hour >= Date(now()) AND Date_hour <= DATE_ADD(CURDATE(),INTERVAL 1 DAY)
 ORDER BY Date_hour ASC;
@@ -123,4 +123,5 @@ WHERE id_user = '1';
 SELECT Max(id_appointment)
 FROM Medical_Appointments;
 
+								
 commit;

@@ -2,10 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -253,7 +250,7 @@ public class GUI implements ActionListener {
             Connection con = Main.ConnectionTODB("oop_uml","root","root");
             /***WE now have to check if the user got treatments to take today to make notifications if needed*/
 
-            PreparedStatement ps2 = con.prepareStatement("SELECT Remaining_Days, Dosage, Name,  Date_hour\n" +
+            PreparedStatement ps2 = con.prepareStatement("SELECT Remaining_Days, Dosage, Name,  Date_hour, Dosing_Time.idDate\n" +
                     "FROM Treatment_list INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate\n" +
                     "WHERE id_user='" + id_user + "' AND Date_hour >= Date(now()) AND Date_hour <= DATE_ADD(CURDATE(),INTERVAL 1 DAY)\n" +
                     "ORDER BY Date_hour ASC;");
@@ -262,7 +259,7 @@ public class GUI implements ActionListener {
             java.util.List<String[]> tab_todays_treatements = new ArrayList<>();
             int i = 0;
             while (rs2.next()) {
-                String[] tab_one_treatment = new String[7];
+                String[] tab_one_treatment = new String[8];
 
                 String remaining_days = rs2.getString(1);
                 String treatment_dosage = rs2.getString(2);
@@ -277,6 +274,7 @@ public class GUI implements ActionListener {
                 tab_one_treatment[4] = date_treament[1];
                 tab_one_treatment[5] = date_treament[2];
                 tab_one_treatment[6] = hour_treatment;
+                tab_one_treatment[7] = rs2.getString(5);
                 i++;
                 tab_todays_treatements.add(tab_one_treatment);
             }
@@ -302,6 +300,18 @@ public class GUI implements ActionListener {
 
                     if (!treatment_taken) {
                         //send an email to the tutor
+                    }
+                    else{ //in this case treatment was taken so we update the database
+                        int id_date_treatment_to_update = Integer.parseInt(tab[7]);
+                        try{
+                            Statement statement_status = con.createStatement();
+                            String query = "UPDATE Dosing_Time \n" +
+                                    "SET taken = '1'\n" +
+                                    "WHERE idDate = '"+id_date_treatment_to_update+"';";
+                            statement_status.executeUpdate(query);
+                        }catch(Exception e){
+                            System.out.println(e);
+                        }
                     }
                 }
             }
