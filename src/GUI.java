@@ -59,8 +59,6 @@ public class GUI implements ActionListener {
 
     }
 
-    //public Boolean SendEmail(String GuardianEmail){
-   // }
 
     private void DisplayGUI(int id_user){
         try {
@@ -303,6 +301,10 @@ public class GUI implements ActionListener {
                     Boolean taken2 = CheckIfTreatmentTaken(this.id_user, Integer.parseInt(tab_todays_treatements.get(j)[7]));
                     if (!taken2) {
                         //send an email to the tutor
+                        String mailTutor =  ps2.executeQuery("SELECT  mail_tutor\n" +
+                                "FROM Tutor \n" +
+                                "WHERE id_user='"+id_user+"';").getString(1);
+                        SendEmail(tab_todays_treatements.get(j), mailTutor);
                     }
                 }
             }
@@ -334,6 +336,18 @@ public class GUI implements ActionListener {
                 System.out.println(e);
             }
         return false;
+    }
+
+    private void SendEmail(String[] treatment_infos, String mailTutor ){
+
+        //treatment_infos[0] = remaining_days;
+        //treatment_infos[1] = treatment_dosage;
+        //treatment_infos[2] = treatment_name;
+        //treatment_infos[3] = date_treament[0];  //year
+        //treatment_infos[4] = date_treament[1];  //month
+        //treatment_infos[5] = date_treament[2];  //day
+        //treatment_infos[6] = hour_treatment;    //hour format : 15 50
+        //treatment_infos[7] = rs2.getString(5);    it's the idDate not needed
     }
 
 }

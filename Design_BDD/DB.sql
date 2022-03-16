@@ -131,5 +131,11 @@ WHERE mail = 'gui@gmail.com';
 SELECT taken
 FROM dosing_time
 WHERE idDate='1';*/
- 
+
+ /*
+SELECT  mail_tutor
+FROM Tutor 
+WHERE id_user='1';*/
+
+
 commit;
