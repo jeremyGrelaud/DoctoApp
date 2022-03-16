@@ -305,7 +305,7 @@ public class GUI implements ActionListener {
                                 "FROM Tutor \n" +
                                 "WHERE id_user='"+id_user+"';");
                         rs3.next();
-                        String mailTutor =rs3.getString(1);
+                        String mailTutor = rs3.getString(1);
                         SendEmail(tab_todays_treatements.get(j), mailTutor);
                     }
                 }
