@@ -97,7 +97,7 @@ WHERE Users.id_user='1';
 
 
 /*get all the hours of todays treatments*/
-SELECT Remaining_Days, Dosage, Name,  Date_hour, Dosing_Time.idDate
+SELECT Remaining_Days, Dosage, Name,  Date_hour, Dosing_Time.idDate, Dosing_time.taken
 FROM Treatment_list INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate
 WHERE id_user='1' AND Date_hour >= Date(now()) AND Date_hour <= DATE_ADD(CURDATE(),INTERVAL 1 DAY)
 ORDER BY Date_hour ASC;
@@ -126,6 +126,10 @@ FROM Medical_Appointments;
 SELECT count(mail)
 FROM Users 
 WHERE mail = 'gui@gmail.com';
-		
+
+/*		
+SELECT taken
+FROM dosing_time
+WHERE idDate='1';*/
  
 commit;

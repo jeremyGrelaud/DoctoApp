@@ -294,24 +294,15 @@ public class GUI implements ActionListener {
                 String Date = tab[3] + "/" + tab[4] + "/" + tab[5] + " " + tab[6];
                 // we now have Date at the same formart than actual_time.format(now)
 
+                Boolean taken1 = CheckIfTreatmentTaken(this.id_user, Integer.parseInt(tab_todays_treatements.get(j)[7]));
                 //if it's time for a treatment
-                if (actual_time.format(now).matches(Date)) {
+                if (actual_time.format(now).matches(Date) && taken1 == false) {
                     treatment_taken = CreateNotification(tab_todays_treatements.get(j));
 
-                    if (!treatment_taken) {
+                    //if it was confirmed the status is updated
+                    Boolean taken2 = CheckIfTreatmentTaken(this.id_user, Integer.parseInt(tab_todays_treatements.get(j)[7]));
+                    if (!taken2) {
                         //send an email to the tutor
-                    }
-                    else{ //in this case treatment was taken so we update the database
-                        int id_date_treatment_to_update = Integer.parseInt(tab[7]);
-                        try{
-                            Statement statement_status = con.createStatement();
-                            String query = "UPDATE Dosing_Time \n" +
-                                    "SET taken = '1'\n" +
-                                    "WHERE idDate = '"+id_date_treatment_to_update+"';";
-                            statement_status.executeUpdate(query);
-                        }catch(Exception e){
-                            System.out.println(e);
-                        }
                     }
                 }
             }
@@ -320,6 +311,29 @@ public class GUI implements ActionListener {
             System.out.println(e);
         }
 
+    }
+
+    private Boolean CheckIfTreatmentTaken(int id_user, int id_date){
+
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
+
+            try{
+                Statement statement_status = con.createStatement();
+                String query = "SELECT taken\n" +
+                        "FROM dosing_time\n" +
+                        "WHERE idDate='"+id_date+"';";
+                ResultSet rs = statement_status.executeQuery(query);
+                rs.next();
+                if(rs.getInt(1)==1){
+                    return true;
+                }
+                else if(rs.getInt(1)==0){
+
+                }
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        return false;
     }
 
 }

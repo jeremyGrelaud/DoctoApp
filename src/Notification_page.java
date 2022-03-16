@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Notification_page implements ActionListener {
 
@@ -11,9 +14,11 @@ public class Notification_page implements ActionListener {
 
     private Boolean treatment_taken;
     private int id_user;
+    private int id_date;
 
     public Notification_page(String[] treatment_infos, int id_user){
         this.id_user=id_user;
+        this.id_date = Integer.parseInt(treatment_infos[7]);
         this.treatment_taken = false;
         DisplayNotification(treatment_infos,id_user);
     }
@@ -27,9 +32,21 @@ public class Notification_page implements ActionListener {
         }
         if(e.getSource() == button_confirm){
             this.treatment_taken = true;
-            frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
-            //et il faudrait qu'on retourne un truc qui dit que le traitment a été pris ...
+            Connection con = Main.ConnectionTODB("oop_uml","root","root");
+            Statement statement_status = null;
+            try {
+                statement_status = con.createStatement();
+                String query = "UPDATE Dosing_Time \n" +
+                        "SET taken = '1'\n" +
+                        "WHERE idDate = '"+id_date+"';";
+                statement_status.executeUpdate(query);
+                frame.dispose();
+                GUI menu_window = new GUI(this.id_user);
+                //et il faudrait qu'on retourne un truc qui dit que le traitment a été pris ...
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
         }
     }
 
