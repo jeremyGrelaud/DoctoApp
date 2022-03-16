@@ -301,9 +301,11 @@ public class GUI implements ActionListener {
                     Boolean taken2 = CheckIfTreatmentTaken(this.id_user, Integer.parseInt(tab_todays_treatements.get(j)[7]));
                     if (!taken2) {
                         //send an email to the tutor
-                        String mailTutor =  ps2.executeQuery("SELECT  mail_tutor\n" +
+                        ResultSet rs3 =  ps2.executeQuery("SELECT  mail_tutor\n" +
                                 "FROM Tutor \n" +
-                                "WHERE id_user='"+id_user+"';").getString(1);
+                                "WHERE id_user='"+id_user+"';");
+                        rs3.next();
+                        String mailTutor =rs3.getString(1);
                         SendEmail(tab_todays_treatements.get(j), mailTutor);
                     }
                 }
