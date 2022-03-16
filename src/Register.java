@@ -116,25 +116,36 @@ public class Register implements ActionListener {
 
             Statement statement = con.createStatement();
 
-            //check if the id already exists
+            //check what's the next id
             ResultSet rs = statement.executeQuery("SELECT max(id_user)\n" +
                     "                    FROM users;");
             rs.next();
             int id_new_user_registered = rs.getInt(1)+1;
 
-            //insert and create user in the database
+            //check if the email is already used
+            rs = statement.executeQuery("SELECT count(mail)\n" +
+                    "                    FROM Users\n" +
+                    "            WHERE mail = '"+email+"';");
+            rs.next();
+            if(rs.getInt(1)==0){
+                //it's okay we continue
+                //insert and create user in the database
+                statement.executeUpdate("INSERT INTO Users VALUES ('" + id_new_user_registered + "','" + email + "','" + password + "');");
+                con.close();
+                //pop up that informs the user
+                JOptionPane.showMessageDialog(frame, "Your journey begins now");
 
-            statement.executeUpdate("INSERT INTO Users VALUES ('" + id_new_user_registered + "','" + email + "','" + password + "');");
-            con.close();
-            //pop up that informs the user
-            JOptionPane.showMessageDialog(frame, "Your journey begins now");
+                //System.out.println(id_new_user_registered);
 
-            //System.out.println(id_new_user_registered);
-
-            frame.dispose(); //dispose of the frame
-            //launch menu page
-            GUI menu_window = new GUI(id_new_user_registered);
-
+                frame.dispose(); //dispose of the frame
+                //launch menu page
+                GUI menu_window = new GUI(id_new_user_registered);
+            }
+            else{
+                JOptionPane.showMessageDialog(frame, "email already used");
+                textFieldUser.setText("");
+                textFieldPassword.setText("");
+            }
 
         }catch(Exception ex){
             System.out.println(ex);

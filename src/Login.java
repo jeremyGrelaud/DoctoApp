@@ -2,10 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class Login implements ActionListener {
 
@@ -48,28 +45,39 @@ public class Login implements ActionListener {
         try {
             Connection con = Main.ConnectionTODB("oop_uml","root","root");
 
-            PreparedStatement ps = con.prepareStatement("SELECT id_user, password\n" +
-                    "            FROM users\n" +
-                    "            WHERE mail='"+mailValue+"';");
-            ResultSet rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product
+            Statement statement = con.createStatement();
+            //check if the email exists in thdatabase
+            ResultSet rs = statement.executeQuery("SELECT count(mail)\n" +
+                    "                    FROM Users\n" +
+                    "            WHERE mail = '"+mailValue+"';");
+            rs.next();
+            if(rs.getInt(1)==1) {
+                PreparedStatement ps = con.prepareStatement("SELECT id_user, password\n" +
+                        "            FROM users\n" +
+                        "            WHERE mail='" + mailValue + "';");
+                rs = ps.executeQuery(); //execute the sql query reading all the datas in the table product
 
-            while(rs.next()) {
-                String id = rs.getString(1);
-                if(passValue.matches(rs.getString(2))){
+                while (rs.next()) {
+                    String id = rs.getString(1);
+                    if (passValue.matches(rs.getString(2))) {
 
-                    this.id_user_connected = Integer.parseInt(id);
-                    frame.dispose(); //dispose of the frame
-                    //launch register page
-                    GUI menu_window = new GUI(this.id_user_connected);
+                        this.id_user_connected = Integer.parseInt(id);
+                        frame.dispose(); //dispose of the frame
+                        //launch register page
+                        GUI menu_window = new GUI(this.id_user_connected);
+                    } else {
+                        //show error message
+                        JOptionPane.showMessageDialog(null, "invalid password");
+                        textFieldPassword.setText("");
+                    }
                 }
-                else{
-                    //show error message
-                    JOptionPane.showMessageDialog(null, "invalid password");
-                }
-
-
-
             }
+            else{
+                JOptionPane.showMessageDialog(null, "email isn't registered");
+                textFieldEmail.setText("");
+                textFieldPassword.setText("");
+            }
+
         } catch(Exception ae) {
             System.out.println(ae);
         }

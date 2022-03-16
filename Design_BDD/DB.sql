@@ -123,5 +123,9 @@ WHERE id_user = '1';
 SELECT Max(id_appointment)
 FROM Medical_Appointments;
 
-								
+SELECT count(mail)
+FROM Users 
+WHERE mail = 'gui@gmail.com';
+		
+ 
 commit;
