@@ -52,7 +52,7 @@ public class TutorApp implements ActionListener {
 
             panel_principal.add(get_patient_report);
 
-            JLabel label = new JLabel("Your patient hasn't taken the followingg treatments : ",SwingConstants.CENTER);
+            JLabel label = new JLabel("Your patient hasn't taken the following treatments : ",SwingConstants.CENTER);
             label.setFont(new Font("Verdana", Font.PLAIN, 28));
             panel_principal.add(label);
 
