@@ -14,6 +14,7 @@ public class Login implements ActionListener {
     private JLabel userLabel, passLabel;
     private JTextField textFieldEmail, textFieldPassword;
     private JFrame frame = new JFrame();//the frame is the window
+    private JCheckBox tutor_box_checked = new JCheckBox("Are you a guardian ?");;
 
     //calling constructor
     Login() {
@@ -30,6 +31,7 @@ public class Login implements ActionListener {
 
         if (e.getSource() == login_button) {
             ValidateLogin();
+
         }
         if (e.getSource() == register_button) {
             frame.dispose(); //dispose of the frame
@@ -63,8 +65,14 @@ public class Login implements ActionListener {
 
                         this.id_user_connected = Integer.parseInt(id);
                         frame.dispose(); //dispose of the frame
-                        //launch register page
-                        GUI menu_window = new GUI(this.id_user_connected);
+                        if(tutor_box_checked.isSelected()){//launch tutor app
+                            TutorApp tutorApp = new TutorApp(this.id_user_connected);
+                        }
+                        else{//patient app
+                            GUI menu_window = new GUI(this.id_user_connected);
+                        }
+
+
                     } else {
                         //show error message
                         JOptionPane.showMessageDialog(null, "invalid password");
@@ -147,6 +155,17 @@ public class Login implements ActionListener {
         c.insets = new Insets(20,20,20,20);  //top padding
         panel.add(login_button, c);
 
+        tutor_box_checked.setFocusable(false);
+        tutor_box_checked.setHorizontalAlignment(SwingConstants.CENTER);
+        tutor_box_checked.setFont(new Font("Verdana", Font.PLAIN, 28));
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1.0;
+        c.gridwidth = 2;
+        c.gridx = 0;
+        c.gridy = 3;
+        c.insets = new Insets(20,20,20,20);  //top padding
+        panel.add(tutor_box_checked, c);
+
         //create button to register as a new user
         register_button = new JButton("Register"); //set label to button
         register_button.setFont(new Font("Verdana", Font.PLAIN, 28));
@@ -154,7 +173,7 @@ public class Login implements ActionListener {
         c.weightx = 1.0;
         c.gridwidth = 2;
         c.gridx = 0;
-        c.gridy = 3;
+        c.gridy = 4;
         c.insets = new Insets(20,20,20,20);  //top padding
         panel.add(register_button, c);
 

@@ -1,3 +1,6 @@
+create database oop_uml;
+use oop_uml;
+
 CREATE TABLE Users(
    id_user INT,
    mail VARCHAR(50) NOT NULL,
@@ -16,8 +19,10 @@ CREATE TABLE Tutor(
    mail_tutor VARCHAR(50),
    Name VARCHAR(50),
    id_user INT NOT NULL,
+   id_tutor INT NOT NULL,
    PRIMARY KEY(mail_tutor),
-   FOREIGN KEY(id_user) REFERENCES Users(id_user)
+   FOREIGN KEY(id_user) REFERENCES Users(id_user),
+   FOREIGN KEY(id_tutor) REFERENCES Users(id_user)
 );
 
 CREATE TABLE Medical_Appointments(
@@ -42,26 +47,37 @@ CREATE TABLE Treatment_list(
    FOREIGN KEY(idDate) REFERENCES Dosing_Time(idDate)
 );
 
+
 INSERT INTO Users (id_user,mail,password) VALUES 
-('1','gui@gmail.com','1234');
+('1','gui@gmail.com','1234'),
+('2','j.g@gmail.com','4321');
 
 INSERT INTO Dosing_Time (idDate,Date_hour,taken) VALUES 
 ('1','2022-03-11 11:30:00','1'),
 ('2','2022-03-11 15:30:00','0'),
 ('3','2022-03-15 15:30:00','0');
 
-INSERT INTO Tutor (mail_tutor, Name, id_user) VALUES 
-('j.g@gmail.com','Jérémy GRELAUD','1');
+INSERT INTO Tutor (mail_tutor, Name, id_user,id_tutor) VALUES 
+('j.g@gmail.com','Jérémy GRELAUD','1','2');
 
+INSERT INTO Medical_Appointments (id_appointment,date_appointment,Name_doctor,Adress,id_user) VALUES
+('1','2022-04-15 16:50:00','Perrin','5 rue de la Bergerie Poitier','1'),
+('2','2022-03-18 17:00:00','Perrin','5 rue de la Bergerie Poitier','1');
 
 INSERT INTO Treatment_list (idTreatment,Remaining_Days,Dosage,Name,id_user,idDate) VALUES 
 ('1','7','50 mL','paracétamol','1','1'),
 ('2','30','1 comprimé','aerius','1','2'),
 ('3','2','2 comprimés','spasfond','1','3');
 
-INSERT INTO Medical_Appointments (id_appointment,date_appointment,Name_doctor,Adress,id_user) VALUES
-('1','2022-04-15 16:50:00','Perrin','5 rue de la Bergerie Poitier','1'),
-('2','2022-03-18 17:00:00','Perrin','5 rue de la Bergerie Poitier','1');
+
+/**Request to get all treatment of the pupil of the guardian that were passed without being confirmed*/
+SELECT mail,Remaining_Days,Dosage,Name,Date_hour,taken
+FROM Treatment_list  INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate
+INNER JOIN Users ON Users.id_user = Treatment_list.id_user
+WHERE Treatment_list.id_user=(SELECT id_user FROM Tutor WHERE id_tutor='2') 
+AND taken='0' AND Date_hour <CURRENT_TIMESTAMP();
+
+
 
 
 
@@ -137,5 +153,10 @@ SELECT  mail_tutor
 FROM Tutor 
 WHERE id_user='1';*/
 
+SELECT mail,Dosage,Name,Date_hour
+FROM Treatment_list  INNER JOIN Dosing_Time ON Treatment_list.idDate = Dosing_Time.idDate
+INNER JOIN Users ON Users.id_user = Treatment_list.id_user
+WHERE Treatment_list.id_user=(SELECT id_user FROM Tutor WHERE id_tutor='2')
+AND taken='0' AND Date_hour < CURRENT_TIMESTAMP();
 
 commit;
