@@ -8,7 +8,17 @@
 </head>
 
 <body>
-    <img src="img_web/logo.png" alt="logo" style="width:22%">
+    <div class="header">
+        <nav id="navbar">
+            <img src="img_web/logo.png" alt="logo" class="logo">
+            <ul id="menu">
+                <li><a href="#first_block">Home</a></li>
+                <li ><a href="Diagrams.html">Diagrams</a></li>
+                <li><a href="Screenshots.html">App screenshots</a></li>
+            </ul>
+        </nav>
+    </div>
+    
 
     <div id="first_block">
         <h1>Purpose of our project</h1>
@@ -110,150 +120,17 @@
 
     </div>
 
-    <div id="fourth_block">
-        <h1>Diagrams</h1>
-        <h2>Use case diagram</h2>
-        <img src="img_web/Use_case_Diagram.png" alt="img of the use case diagram" style="width:100%">
-        <p>This is our use case diagram, you can see 3 actors : patient, admin & Guardian
-            With Doctoapp, Patient can Login, Register, have a list of treatments or appointements, taking treatment, consult guardian or being notified for its treeatment.
-            Guardian can Login, Register, Consult and modify its informations, Take an appointment, Set a treatment or being notified if the patient didn't take its treatment.
-            Finaly the admin can access to the list of appointment, list of treatment and the guardian information.
-        </p>
-
-        <h2>Activity diagram</h2>
-        <img src="img_web/Activity diagram.png" alt="img of the activity diagram" style="width:100%">
-        <p>This is the Activity diagram, we can see the actions proccesed by each class.
-            The user app do the login/register, show and process the menu and displays the notifications.
-            The treatment part manage all backend stuff, checking, adding or updating in database.
-        </p>
-
-        <h2>CRC cards</h2>
-        <img src="img_web/CRC cards.jpg" alt="img of the crc cards" style="width:100%">
-        <p>This is the CRC diagram. We can see all the classes we need and all dependecies.
-            We can see that the center of our programm is the GUI class. It's normal, it's our menu.
-        </p>
-
-        <h2>Sequence diagram</h2>
-        <img src="img_web/Sequence diagram.png" alt="img of the Sequence diagram" style="width:100%">
-        <p>This is our sequence diagram, we can see that the Backend server and the BD are a lot used.
-            Basicly, the app ask for some data and the server sent the data back.
-        </p>
-
-        <h2>UML class diagram</h2>
-        <img src="img_web/UML class diagram.png" alt="img of the UML class diagram" style="width:100%">
-        <p>Here is ou UML Class diagram. We can clearly see the dependencies between classes.
-            As we said GUI, the menu is the center, we can also see how the Form are part of the severals windows and how windows are parts of the menu.
-        </p>
-
-        <h2>State machine diagram(s)</h2>
-        <img src="img_web/machine state diagram.png" alt="img of the machine state diagram" style="width:100%">
-        <p>Here the State machine diagram, we can see how pages interact. On each transition, there are our functions and conditions.
-            We can se the path the user can take throught the site.
-        </p>
-
-        <h2>First use case scenario</h2>
-        <img src="img_web/use_case_scenario_n°1.jpg" alt="img of the first use case scenario" style="width:100%">
-        <p>In this use case scenario, we show the steps for the register case.
-        </p>
-
-        <h2>Second use case scenario</h2>
-        <img src="img_web/use_case_scenario_n°2.jpg" alt="img of the second use case scenario" style="width:100%">
-        <p>In this use case scenario, we present the steps when a user wants to access to his treatment. He can both create or see his appointments.
-        </p>
+    
 
 
-        <h2>Package diagram(s)</h2>
-        <img src="img_web/Diagram packages.png" alt="img of the package diagram" style="width:100%">
-        <p>Here is the package diagram, we can see dependencies between classes. We can see the notification class is import in a lot of classes of PatientApp.
-        </p>
-
-        <h2>Object diagram of the use case being alerted by a notification when you have to take medicine</h2>
-        <img src="img_web/Object diagram.png" alt="img of the use case object diagram" style="width:100%">
-        <p>This diagram shows the values of the 3 classes implicated in the treatment notification process.
-            First, you have to be logged in to your account. Then being in the menu and at the time of one of your treatments
-            Then click on the pop up and finally interact with the notification page. Here the user confirmed that he took his medication as 
-            treatment_taken = true.
-        </p>
-
-
-    </div>
-
-
-    <div id="fifth_block">
-        <h1>Screenshots of the application</h1>
-
-        <h2>Login page</h2>
-        <img src="img_web/img_app/login.PNG" alt="img of the login page" style="width:90%">
-        <p>To log in the website, you have to entrer a valid email and the corresponding password.</p>
-
-        <h2>Register page</h2>
-        <img src="img_web/img_app/register.PNG" alt="img of the register page" style="width:90%">
-        <p>Same as the Login page but you have to an email that doesn't exit in the database.</p>
-
-        <h2>Tutor App</h2>
-        <img src="img_web/img_app/tutor_app.PNG" alt="img of the tutor app" style="width:90%">
-        <p>If you click the checkbox then that means you want to access the tutor/guardian interface. There you can get
-            a report in a txt file of all you pupil's treatments and also see in the table all the treatments you pupil hasn't confirmed 
-            taking them.
-        </p>
-
-        <h2>Menu</h2>
-        <img src="img_web/img_app/menu.PNG" alt="img of the Menu" style="width:90%">
-        <p>Here is our menu, on the top, you can see your next medical appointment.
-            Next, you have four buttons to go on the page that you want.
-        </p>
-
-        <h2>Notification pop up</h2>
-        <img src="img_web/img_app/notification.PNG" alt="img of a pop up notification" style="width:90%">
-        <p>This is a pop up to remind the user to take the treatment.</p>
-
-        <h2>Notification page</h2>
-        <img src="img_web/img_app/notification_page.PNG" alt="img of a Notification page" style="width:90%">
-        <p>One this notification, you can comfirm that you took your treatment.
-            Of course, the edication you need and the dosage is write at the top.
-        </p>
-
-        <h2>Treament page</h2>
-        <img src="img_web/img_app/treatment.PNG" alt="img of the treatment list page" style="width:90%">
-        <p>Here is the schedule of the user's treatments. it is a basic 2D array with data inside.
-            The user can back to the menu or add a new treatment.
-        </p>
-
-        <h2>Page to add treaments</h2>
-        <img src="img_web/img_app/treatmentform.PNG" alt="img of the treatment form page" style="width:90%">
-        <p>On this page, the user can add a new treatment by fill the form with the treatment name, the dosage, the remaining days and the hour.</p>
-
-        <h2>Appointment page</h2>
-        <img src="img_web/img_app/appointments.PNG" alt="img of the appointement page" style="width:90%">
-        <p>Here is the schedule of the user's appointment. It is a basic 2D array with data inside.
-            The user can back to the menu or add a new appointment.</p>
-
-        <h2>Page to add appointements</h2>
-        <img src="img_web/img_app/appointmentsform.PNG" alt="img of the login page" style="width:90%">
-        <p>On this page, the user can add a new appointment by fill the form with the doctor name, the adress and the date.</p>
-
-        <h2>Guardian page</h2>
-        <img src="img_web/img_app/tutor.PNG" alt="img of the login page" style="width:90%">
-        <p>Here is the guardian page where user can see the guardian's information. He can also change the informations.</p>
-
-        <h2>Page to modify guardian info</h2>
-        <img src="img_web/img_app/tutorform.PNG" alt="img of the login page" style="width:90%">
-        <p>Here the user can change its tutor by entering a new name and a new email.</p>
-
-        <h2>Help page</h2>
-        <img src="img_web/img_app/help.PNG" alt="img of the help page" style="width:90%">
-        <p>Finaly, this is the help page created to explain the basic functionalitiesof the app to the user.</p>
-        
-
-    </div>
+    
 
     <div>
         <a href="https://github.com/jeremyGrelaud/DoctoApp.git">link to our github</a>
     </div>
 
 
-
+    <script type="text/javascript" src="script.js"></script>
 </body>
-
 
 </html>

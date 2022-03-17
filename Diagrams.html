@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style_DoctoApp.css">
+	<meta charset="utf-8">
+    <title>DoctoApp</title>
+</head>
+
+<body>
+    <div class="header">
+        <nav id="navbar">
+            <img src="img_web/logo.png" alt="logo" class="logo">
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li ><a href="Diagrams.html">Diagrams</a></li>
+                <li><a href="Screenshots.html">App screenshots</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="fourth_block">
+        <h1>Diagrams</h1>
+        <h2>Use case diagram</h2>
+        <img src="img_web/Use_case_Diagram.png" alt="img of the use case diagram" style="width:100%">
+        <p>This is our use case diagram, you can see 3 actors : patient, admin & Guardian
+            With Doctoapp, Patient can Login, Register, have a list of treatments or appointements, taking treatment, consult guardian or being notified for its treeatment.
+            Guardian can Login, Register, Consult and modify its informations, Take an appointment, Set a treatment or being notified if the patient didn't take its treatment.
+            Finaly the admin can access to the list of appointment, list of treatment and the guardian information.
+        </p>
+
+        <h2>Activity diagram</h2>
+        <img src="img_web/Activity diagram.png" alt="img of the activity diagram" style="width:100%">
+        <p>This is the Activity diagram, we can see the actions proccesed by each class.
+            The user app do the login/register, show and process the menu and displays the notifications.
+            The treatment part manage all backend stuff, checking, adding or updating in database.
+        </p>
+
+        <h2>CRC cards</h2>
+        <img src="img_web/CRC cards.jpg" alt="img of the crc cards" style="width:100%">
+        <p>This is the CRC diagram. We can see all the classes we need and all dependecies.
+            We can see that the center of our programm is the GUI class. It's normal, it's our menu.
+        </p>
+
+        <h2>Sequence diagram</h2>
+        <img src="img_web/Sequence diagram.png" alt="img of the Sequence diagram" style="width:100%">
+        <p>This is our sequence diagram, we can see that the Backend server and the BD are a lot used.
+            Basicly, the app ask for some data and the server sent the data back.
+        </p>
+
+        <h2>UML class diagram</h2>
+        <img src="img_web/UML class diagram.png" alt="img of the UML class diagram" style="width:100%">
+        <p>Here is ou UML Class diagram. We can clearly see the dependencies between classes.
+            As we said GUI, the menu is the center, we can also see how the Form are part of the severals windows and how windows are parts of the menu.
+        </p>
+
+        <h2>State machine diagram(s)</h2>
+        <img src="img_web/machine state diagram.png" alt="img of the machine state diagram" style="width:100%">
+        <p>Here the State machine diagram, we can see how pages interact. On each transition, there are our functions and conditions.
+            We can se the path the user can take throught the site.
+        </p>
+
+        <h2>First use case scenario</h2>
+        <img src="img_web/use_case_scenario_n°1.jpg" alt="img of the first use case scenario" style="width:100%">
+        <p>In this use case scenario, we show the steps for the register case.
+        </p>
+
+        <h2>Second use case scenario</h2>
+        <img src="img_web/use_case_scenario_n°2.jpg" alt="img of the second use case scenario" style="width:100%">
+        <p>In this use case scenario, we present the steps when a user wants to access to his treatment. He can both create or see his appointments.
+        </p>
+
+
+        <h2>Package diagram(s)</h2>
+        <img src="img_web/Diagram packages.png" alt="img of the package diagram" style="width:100%">
+        <p>Here is the package diagram, we can see dependencies between classes. We can see the notification class is import in a lot of classes of PatientApp.
+        </p>
+
+        <h2>Object diagram of the use case being alerted by a notification when you have to take medicine</h2>
+        <img src="img_web/Object diagram.png" alt="img of the use case object diagram" style="width:100%">
+        <p>This diagram shows the values of the 3 classes implicated in the treatment notification process.
+            First, you have to be logged in to your account. Then being in the menu and at the time of one of your treatments
+            Then click on the pop up and finally interact with the notification page. Here the user confirmed that he took his medication as 
+            treatment_taken = true.
+        </p>
+
+
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
