@@ -15,8 +15,8 @@ public class TutorWindow implements ActionListener {
     private int id_user;
     private JPanel p = new JPanel();
 
-    TutorWindow(int id_user) {
-        this.id_user = id_user;
+    TutorWindow() {
+        this.id_user = Login.getId_user_connected();
         DisplayTutor(id_user);
     }
 
@@ -25,7 +25,7 @@ public class TutorWindow implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
+            GUI menu_window = new GUI();
         }
         if(e.getSource() == modify_tutor){
             ModifyTutorInfos();
@@ -105,7 +105,7 @@ public class TutorWindow implements ActionListener {
 
     private void ModifyTutorInfos(){
         frame.dispose();
-        TutorForm tutorForm = new TutorForm(this.id_user);
+        TutorForm tutorForm = new TutorForm();
     }
 }
 

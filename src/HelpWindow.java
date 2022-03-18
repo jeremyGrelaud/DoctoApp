@@ -10,8 +10,8 @@ public class HelpWindow implements ActionListener {
     private int id_user;
 
     private JPanel panel = new JPanel();
-    HelpWindow(int id_user) {
-        this.id_user=id_user;
+    HelpWindow() {
+        this.id_user=Login.getId_user_connected();
         //creating a button allowing to go back to the main menu
         Display_help(id_user);
     }
@@ -21,7 +21,7 @@ public class HelpWindow implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
+            GUI menu_window = new GUI();
         }
     }
 

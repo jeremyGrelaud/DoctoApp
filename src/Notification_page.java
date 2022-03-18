@@ -16,8 +16,8 @@ public class Notification_page implements ActionListener {
     private int id_user;
     private int id_date;
 
-    public Notification_page(String[] treatment_infos, int id_user){
-        this.id_user=id_user;
+    public Notification_page(String[] treatment_infos){
+        this.id_user=Login.getId_user_connected();
         this.id_date = Integer.parseInt(treatment_infos[7]);
         this.treatment_taken = false;
         DisplayNotification(treatment_infos,id_user);
@@ -28,7 +28,7 @@ public class Notification_page implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
+            GUI menu_window = new GUI();
         }
         if(e.getSource() == button_confirm){
             this.treatment_taken = true;
@@ -41,7 +41,7 @@ public class Notification_page implements ActionListener {
                         "WHERE idDate = '"+id_date+"';";
                 statement_status.executeUpdate(query);
                 frame.dispose();
-                GUI menu_window = new GUI(this.id_user);
+                GUI menu_window = new GUI();
                 //et il faudrait qu'on retourne un truc qui dit que le traitment a été pris ...
             } catch (SQLException ex) {
                 ex.printStackTrace();

@@ -17,8 +17,8 @@ public class TutorApp implements ActionListener {
     private int id_Tutor_user;
     private JPanel p = new JPanel();
 
-    TutorApp(int id_Tutor_user) {
-        this.id_Tutor_user = id_Tutor_user;
+    TutorApp() {
+        this.id_Tutor_user = Login.getId_user_connected();
         DisplayTutorApp(id_Tutor_user);
     }
 
@@ -137,7 +137,6 @@ public class TutorApp implements ActionListener {
         }
         return p;
     }
-
 
     private static void GetHistoryTreatmentsUser(int id_user){
 

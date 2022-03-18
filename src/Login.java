@@ -22,8 +22,9 @@ public class Login implements ActionListener {
     }
 
 
-    public int getId_user_connected(){
-        return this.id_user_connected;
+    public static int getId_user_connected(){
+        userID UserConnected = userID.getInstance();
+        return UserConnected.getId();
     }
 
     //define abstract method actionPerformed() which will be called on button click
@@ -64,12 +65,15 @@ public class Login implements ActionListener {
                     if (passValue.matches(rs.getString(2))) {
 
                         this.id_user_connected = Integer.parseInt(id);
+                        userID id_user = userID.getInstance();
+                        id_user.setId(Integer.parseInt(id));
+
                         frame.dispose(); //dispose of the frame
                         if(tutor_box_checked.isSelected()){//launch tutor app
-                            TutorApp tutorApp = new TutorApp(this.id_user_connected);
+                            TutorApp tutorApp = new TutorApp();
                         }
                         else{//patient app
-                            GUI menu_window = new GUI(this.id_user_connected);
+                            GUI menu_window = new GUI();
                         }
 
 
@@ -181,6 +185,9 @@ public class Login implements ActionListener {
         login_button.addActionListener(this);     //add action listener to button
         register_button.addActionListener(this);
 
+
+        setIconLogo();
+
         frame.add(panel);
         frame.setSize(900,600); //size of the frame
         frame.setLocationRelativeTo(null);
@@ -189,4 +196,11 @@ public class Login implements ActionListener {
         frame.setTitle("Login");         //set title to the login form
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //for the exit cross
     }
+
+    public void setIconLogo(){
+        ImageIcon img = new ImageIcon("D:\\Efrei\\L3\\semestre 6\\OO_UML\\Project_V2\\DoctoApp\\img_web\\logo.png");
+        frame.setIconImage(img.getImage());
+    }
 }
+
+

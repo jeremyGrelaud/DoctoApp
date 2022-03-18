@@ -18,8 +18,8 @@ public class GUI implements ActionListener {
     private int id_user;
 
     //constructor
-    public GUI(int id_user) {
-        this.id_user = id_user;
+    public GUI() {
+        this.id_user = Login.getId_user_connected();
         DisplayGUI(id_user);
     }
 
@@ -30,16 +30,16 @@ public class GUI implements ActionListener {
         if (e.getSource() == treatment) {
             //close the actual frame instance
             frame.dispose(); //will close the actual frame
-            TreatmentWindow the_treatment_window = new TreatmentWindow(this.id_user);
+            TreatmentWindow the_treatment_window = new TreatmentWindow();
         } else if (e.getSource() == tutor) {
             frame.dispose();
-            TutorWindow the_tutor_window = new TutorWindow(this.id_user);
+            TutorWindow the_tutor_window = new TutorWindow();
         } else if (e.getSource() == appointments) {
             frame.dispose();
-            AppointmentsWindow the_appointments_window = new AppointmentsWindow(this.id_user);
+            AppointmentsWindow the_appointments_window = new AppointmentsWindow();
         } else if (e.getSource() == help) {
             frame.dispose();
-            HelpWindow the_help_window = new HelpWindow(this.id_user);
+            HelpWindow the_help_window = new HelpWindow();
         }
     }
 
@@ -49,7 +49,7 @@ public class GUI implements ActionListener {
         int choice = JOptionPane.showConfirmDialog(null, "Click ok to check your treatment", treatment_name + " treatment", JOptionPane.YES_OPTION);
         if (choice == 0) {
             frame.dispose();
-            Notification_page new_notif_window = new Notification_page(treatment_infos, this.id_user);
+            Notification_page new_notif_window = new Notification_page(treatment_infos);
             taken = new_notif_window.getTreatment_taken();
         }
         //return 0 for yes
@@ -62,6 +62,10 @@ public class GUI implements ActionListener {
 
     private void DisplayGUI(int id_user){
         try {
+
+            userID UserConnected = userID.getInstance();
+            id_user = UserConnected.getId();
+
             String date_next_appointment = null;
             String[] hour_next_appointment = null;
             String doctor_next_appointment = null;

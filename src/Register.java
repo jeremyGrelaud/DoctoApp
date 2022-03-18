@@ -137,9 +137,12 @@ public class Register implements ActionListener {
 
                 //System.out.println(id_new_user_registered);
 
+                userID id_user = userID.getInstance();
+                id_user.setId(id_new_user_registered);
+
                 frame.dispose(); //dispose of the frame
                 //launch menu page
-                GUI menu_window = new GUI(id_new_user_registered);
+                GUI menu_window = new GUI();
             }
             else{
                 JOptionPane.showMessageDialog(frame, "email already used");

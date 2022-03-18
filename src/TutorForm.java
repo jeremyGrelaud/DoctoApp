@@ -13,8 +13,8 @@ public class TutorForm implements ActionListener{
     private JTextField NameTutor_tf, MailTutor_tf;
     private Font font = new Font("Verdana",Font.PLAIN,28);
 
-    public TutorForm(int id_user){
-        this.id_user = id_user;
+    public TutorForm(){
+        this.id_user = Login.getId_user_connected();
         DisplayTutorForm(id_user);
     }
 
@@ -134,7 +134,7 @@ public class TutorForm implements ActionListener{
         }
         if (e.getSource() == button_return_to_tutor) {
             frame.dispose();
-            TutorWindow tutorWindow = new TutorWindow(this.id_user);
+            TutorWindow tutorWindow = new TutorWindow();
         }
     }
 
@@ -153,7 +153,7 @@ public class TutorForm implements ActionListener{
             JOptionPane.showMessageDialog(frame, "Info updated");
             con.close();
             frame.dispose();
-            TutorWindow tutorWindow = new TutorWindow(this.id_user);
+            TutorWindow tutorWindow = new TutorWindow();
         }catch(Exception e){
             System.out.println(e);
         }

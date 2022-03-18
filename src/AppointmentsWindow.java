@@ -17,8 +17,8 @@ public class AppointmentsWindow implements ActionListener {
 
     private JButton button_add_appointment;
 
-    AppointmentsWindow(int id_user) {
-        this.id_user=id_user;
+    AppointmentsWindow() {
+        this.id_user=Login.getId_user_connected();
         DisplayAppointments(id_user);
     }
 
@@ -27,7 +27,7 @@ public class AppointmentsWindow implements ActionListener {
         //action when the button is clicked
         if (e.getSource() == button_return_to_menu) {
             frame.dispose();
-            GUI menu_window = new GUI(this.id_user);
+            GUI menu_window = new GUI();
         }
         if(e.getSource() == button_add_appointment){
             AddAppointment();
@@ -117,7 +117,7 @@ public class AppointmentsWindow implements ActionListener {
 
     private void AddAppointment(){
         frame.dispose();
-        AppointmentForm appointment_form_window = new AppointmentForm(this.id_user);
+        AppointmentForm appointment_form_window = new AppointmentForm();
     }
 }
 

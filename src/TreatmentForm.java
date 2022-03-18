@@ -22,8 +22,8 @@ public class TreatmentForm implements ActionListener{
     private Font font = new Font("Verdana",Font.PLAIN,28);
     private JFormattedTextField tf_date_hour;
 
-    public TreatmentForm(int id_user){
-        this.id_user = id_user;
+    public TreatmentForm(){
+        this.id_user = Login.getId_user_connected();
         DisplayTreatmentForm(id_user);
     }
 
@@ -40,7 +40,7 @@ public class TreatmentForm implements ActionListener{
         }
         if (e.getSource() == button_return_to_treatment) {
             frame.dispose();
-            TreatmentWindow treatmentWindow = new TreatmentWindow(this.id_user);
+            TreatmentWindow treatmentWindow = new TreatmentWindow();
         }
     }
 
@@ -221,7 +221,7 @@ public class TreatmentForm implements ActionListener{
                 //pop up that informs the user
                 JOptionPane.showMessageDialog(frame, "Treatment added");
                 frame.dispose();
-                TreatmentWindow treatmentWindow = new TreatmentWindow(this.id_user);
+                TreatmentWindow treatmentWindow = new TreatmentWindow();
             }
             else{
                 JOptionPane.showMessageDialog(frame, "Error in the process");

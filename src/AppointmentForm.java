@@ -19,8 +19,8 @@ public class AppointmentForm implements ActionListener{
     private Font font = new Font("Verdana",Font.PLAIN,28);
     private JFormattedTextField Date_tf;
 
-    public AppointmentForm(int id_user){
-        this.id_user = id_user;
+    public AppointmentForm(){
+        this.id_user = Login.getId_user_connected();
         DisplayAppointmentForm(id_user);
     }
 
@@ -35,7 +35,7 @@ public class AppointmentForm implements ActionListener{
         }
         if (e.getSource() == button_return_to_appointment) {
             frame.dispose();
-            AppointmentsWindow appointmentsWindow = new AppointmentsWindow(this.id_user);
+            AppointmentsWindow appointmentsWindow = new AppointmentsWindow();
         }
     }
 
@@ -178,7 +178,7 @@ public class AppointmentForm implements ActionListener{
                 //pop up that informs the user
                 JOptionPane.showMessageDialog(frame, "Appointment added");
                 frame.dispose();
-                AppointmentsWindow appointmentsWindow = new AppointmentsWindow(this.id_user);
+                AppointmentsWindow appointmentsWindow = new AppointmentsWindow();
             }
             else{
                 JOptionPane.showMessageDialog(frame, "Error in the process");
