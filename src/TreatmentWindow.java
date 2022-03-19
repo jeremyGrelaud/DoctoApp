@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -16,7 +15,7 @@ public class TreatmentWindow implements ActionListener {
     private JPanel p = new JPanel();
     TreatmentWindow() {
         this.id_user = Login.getId_user_connected();
-        DisplayTreatments(id_user);
+        DisplayTreatments();
     }
 
     @Override
@@ -31,7 +30,7 @@ public class TreatmentWindow implements ActionListener {
         }
     }
 
-    private void DisplayTreatments(int id_user){
+    private void DisplayTreatments(){
         try {
             Connection con = Main.ConnectionTODB("oop_uml","root","root");
 

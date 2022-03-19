@@ -4,9 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 
 public class AppointmentForm implements ActionListener{
@@ -21,7 +18,7 @@ public class AppointmentForm implements ActionListener{
 
     public AppointmentForm(){
         this.id_user = Login.getId_user_connected();
-        DisplayAppointmentForm(id_user);
+        DisplayAppointmentForm();
     }
 
     //define abstract method actionPerformed() which will be called on button click
@@ -39,7 +36,7 @@ public class AppointmentForm implements ActionListener{
         }
     }
 
-    private void DisplayAppointmentForm(int id_user){
+    private void DisplayAppointmentForm(){
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();

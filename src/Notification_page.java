@@ -20,7 +20,7 @@ public class Notification_page implements ActionListener {
         this.id_user=Login.getId_user_connected();
         this.id_date = Integer.parseInt(treatment_infos[7]);
         this.treatment_taken = false;
-        DisplayNotification(treatment_infos,id_user);
+        DisplayNotification(treatment_infos);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Notification_page implements ActionListener {
         return treatment_taken;
     }
 
-    private void DisplayNotification(String[] treatment_infos, int id_user){
+    private void DisplayNotification(String[] treatment_infos){
         String remaining_days = treatment_infos[0];
         String treatment_dosage = treatment_infos[1];
         String treatment_name = treatment_infos[2];

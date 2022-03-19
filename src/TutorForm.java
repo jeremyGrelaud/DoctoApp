@@ -15,10 +15,10 @@ public class TutorForm implements ActionListener{
 
     public TutorForm(){
         this.id_user = Login.getId_user_connected();
-        DisplayTutorForm(id_user);
+        DisplayTutorForm();
     }
 
-    private void DisplayTutorForm(int id_user){
+    private void DisplayTutorForm(){
 
         try{
 
@@ -130,7 +130,7 @@ public class TutorForm implements ActionListener{
             String NameTutor_value = NameTutor_tf.getText();
             String MailTutor_value = MailTutor_tf.getText();
 
-            AddTutor(id_user,NameTutor_value,MailTutor_value);
+            AddTutor(NameTutor_value,MailTutor_value);
         }
         if (e.getSource() == button_return_to_tutor) {
             frame.dispose();
@@ -138,7 +138,7 @@ public class TutorForm implements ActionListener{
         }
     }
 
-    public void AddTutor(int id_user,String NameTutor,String MailTutor){
+    public void AddTutor(String NameTutor,String MailTutor){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8";

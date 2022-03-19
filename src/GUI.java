@@ -20,7 +20,7 @@ public class GUI implements ActionListener {
     //constructor
     public GUI() {
         this.id_user = Login.getId_user_connected();
-        DisplayGUI(id_user);
+        DisplayGUI();
     }
 
 
@@ -60,7 +60,7 @@ public class GUI implements ActionListener {
     }
 
 
-    private void DisplayGUI(int id_user){
+    private void DisplayGUI(){
         try {
 
             userID UserConnected = userID.getInstance();

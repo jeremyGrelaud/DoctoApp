@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -19,7 +18,7 @@ public class AppointmentsWindow implements ActionListener {
 
     AppointmentsWindow() {
         this.id_user=Login.getId_user_connected();
-        DisplayAppointments(id_user);
+        DisplayAppointments();
     }
 
     @Override
@@ -34,7 +33,7 @@ public class AppointmentsWindow implements ActionListener {
         }
     }
 
-    private void DisplayAppointments(int id_user){
+    private void DisplayAppointments(){
         try {
             //int res = getId_user_connected();
             Connection con = Main.ConnectionTODB("oop_uml","root","root");

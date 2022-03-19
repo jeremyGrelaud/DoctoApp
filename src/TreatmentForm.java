@@ -7,9 +7,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 
 public class TreatmentForm implements ActionListener{
@@ -24,7 +21,7 @@ public class TreatmentForm implements ActionListener{
 
     public TreatmentForm(){
         this.id_user = Login.getId_user_connected();
-        DisplayTreatmentForm(id_user);
+        DisplayTreatmentForm();
     }
 
     //define abstract method actionPerformed() which will be called on button click
@@ -35,7 +32,7 @@ public class TreatmentForm implements ActionListener{
             String Remaining_Days_value = tf_remaining_days.getText();
             String DateHour_value = tf_date_hour.getText();
 
-            AddTreatment(id_user, Namevalue,Dosagevalue,Remaining_Days_value, DateHour_value);
+            AddTreatment(Namevalue,Dosagevalue,Remaining_Days_value, DateHour_value);
 
         }
         if (e.getSource() == button_return_to_treatment) {
@@ -44,7 +41,7 @@ public class TreatmentForm implements ActionListener{
         }
     }
 
-    private void DisplayTreatmentForm(int id_user){
+    private void DisplayTreatmentForm(){
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -185,7 +182,7 @@ public class TreatmentForm implements ActionListener{
 
     }
 
-    public void AddTreatment(int id_user, String Name, String Dosage, String RemainingDays, String DateHour){
+    public void AddTreatment(String Name, String Dosage, String RemainingDays, String DateHour){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/oop_uml?characterEncoding=utf8";

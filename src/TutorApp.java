@@ -19,7 +19,7 @@ public class TutorApp implements ActionListener {
 
     TutorApp() {
         this.id_Tutor_user = Login.getId_user_connected();
-        DisplayTutorApp(id_Tutor_user);
+        DisplayTutorApp();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class TutorApp implements ActionListener {
         }
     }
 
-    private void DisplayTutorApp(int id_Tutor_user) {
+    private void DisplayTutorApp() {
 
             JPanel panel_principal = new JPanel();
             panel_principal.setLayout(new GridLayout(3, 1));

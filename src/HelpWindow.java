@@ -13,7 +13,7 @@ public class HelpWindow implements ActionListener {
     HelpWindow() {
         this.id_user=Login.getId_user_connected();
         //creating a button allowing to go back to the main menu
-        Display_help(id_user);
+        Display_help();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class HelpWindow implements ActionListener {
         }
     }
 
-    private void Display_help(int id_user)
+    private void Display_help()
     {
         GridLayout layout = new GridLayout(8,1);
         panel.setLayout(layout);
