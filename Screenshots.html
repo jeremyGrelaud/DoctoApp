@@ -24,65 +24,89 @@
 
         <h2>Login page</h2>
         <img src="img_web/img_app/login.PNG" alt="img of the login page" style="width:90%">
-        <p>To log in the website, you have to entrer a valid email and the corresponding password.</p>
+        <p>To log in the website, you have to entrer a valid email (existing in the database) and the corresponding password then press the login button.
+            You can also check the checkbox in the middle of the screen if you want to access the tutor version of the app and not the patient version.
+            The validation is done using SQL queries. If the user hasn't registered yet he will have to click the register 
+            button in order to be redirected to the register page.
+        </p>
 
         <h2>Register page</h2>
         <img src="img_web/img_app/register.PNG" alt="img of the register page" style="width:90%">
-        <p>Same as the Login page but you have to an email that doesn't exit in the database.</p>
+        <p>Same porcess as the Login page but you have to enter an email that doesn't exist yet in the database.</p>
 
         <h2>Tutor App</h2>
         <img src="img_web/img_app/tutor_app.PNG" alt="img of the tutor app" style="width:90%">
-        <p>If you click the checkbox then that means you want to access the tutor/guardian interface. There you can get
+        <p>You access this page by clicking the checkbox on the login page. Here you can get
             a report in a txt file of all you pupil's treatments and also see in the table all the treatments you pupil hasn't confirmed 
-            taking them.
+            taking them. The link between a pupil and his tutor his made with id connection in the database and the informations are dynamically
+            displayed using SQL queries. 
         </p>
 
         <h2>Menu</h2>
         <img src="img_web/img_app/menu.PNG" alt="img of the Menu" style="width:90%">
-        <p>Here is our menu, on the top, you can see your next medical appointment.
-            Next, you have four buttons to go on the page that you want.
+        <p>Here is our menu, on the top, you can see your next medical appointment if you have one.
+            Next, you have four icons button that leads to the different pages of the app.
+            The next appointment is determined by a SQL querry checking all the user's appointment after the
+            actual time and ordering them in an ascendant order.
         </p>
 
         <h2>Notification pop up</h2>
         <img src="img_web/img_app/notification.PNG" alt="img of a pop up notification" style="width:90%">
-        <p>This is a pop up to remind the user to take the treatment.</p>
+        <p>This is a pop up to remind the user to take the treatment.
+            This pop up is generated when the user loads a new page and that
+            the time in the machine correspond to the treatment time.
+            It's also displayed only if the user hasn't confirmed yet that he took his treatment.
+        </p>
 
         <h2>Notification page</h2>
         <img src="img_web/img_app/notification_page.PNG" alt="img of a Notification page" style="width:90%">
         <p>One this notification, you can comfirm that you took your treatment.
-            Of course, the edication you need and the dosage is write at the top.
+            And of course see a remainder of the medication you need to take, the dosage and the remaining number of days.
+            When confirmed or not it will directly update the database.
         </p>
 
         <h2>Treament page</h2>
         <img src="img_web/img_app/treatment.PNG" alt="img of the treatment list page" style="width:90%">
-        <p>Here is the schedule of the user's treatments. it is a basic 2D array with data inside.
-            The user can back to the menu or add a new treatment.
+        <p>Here is the schedule of the user's treatments. Each row correspond to one treatment.
+            The user can go back to the menu or add a new treatment by clicking on the 2 buttons.
+            The datas are loaded dynamically from the database.
         </p>
 
         <h2>Page to add treaments</h2>
         <img src="img_web/img_app/treatmentform.PNG" alt="img of the treatment form page" style="width:90%">
-        <p>On this page, the user can add a new treatment by fill the form with the treatment name, the dosage, the remaining days and the hour.</p>
+        <p>On this page, the user can add a new treatment by filling the form with the treatment name, the dosage, the remaining days and the hour.
+            Or he can decide to go back to the treatment page.
+        </p>
 
         <h2>Appointment page</h2>
         <img src="img_web/img_app/appointments.PNG" alt="img of the appointement page" style="width:90%">
-        <p>Here is the schedule of the user's appointment. It is a basic 2D array with data inside.
-            The user can back to the menu or add a new appointment.</p>
+        <p>Here is the schedule of the user's appointment. Each row correspond to an appointement.
+            The user can go back to the menu or add a new appointment by clicking on the 2 buttons.
+            The datas are loaded dynamically from the database.
+        </p>
 
         <h2>Page to add appointements</h2>
         <img src="img_web/img_app/appointmentsform.PNG" alt="img of the login page" style="width:90%">
-        <p>On this page, the user can add a new appointment by fill the form with the doctor name, the adress and the date.</p>
+        <p>On this page, the user can add a new appointment by filling the form with the doctor name, the adress and the date.
+            Or he can decide to go back to the appointment page.
+        </p>
 
         <h2>Guardian page</h2>
         <img src="img_web/img_app/tutor.PNG" alt="img of the login page" style="width:90%">
-        <p>Here is the guardian page where user can see the guardian's information. He can also change the informations.</p>
+        <p>Here is the guardian page where user can see the guardian's information. He can also change the informations.
+            Or he can decide to go back to the menu.
+        </p>
 
         <h2>Page to modify guardian info</h2>
         <img src="img_web/img_app/tutorform.PNG" alt="img of the login page" style="width:90%">
-        <p>Here the user can change its tutor by entering a new name and a new email.</p>
+        <p>Here the user can change it's tutor by entering a new name and a new email and then confirm the update by
+            pressing the save button.
+            Or he can decide to go back to guardian page.
+        </p>
 
         <h2>Help page</h2>
         <img src="img_web/img_app/help.PNG" alt="img of the help page" style="width:90%">
-        <p>Finaly, this is the help page created to explain the basic functionalitiesof the app to the user.</p>
+        <p>Finaly, this is the help page created to explain the basic functionalities of the app to the user.</p>
         
 
     </div>
